@@ -17,6 +17,9 @@ navigator.notification.confirm(
     'Game Over',           // title
     ['Restart','Exit']     // buttonLabels
 );
+    function onConfirm(buttonIndex) {
+    alert('You selected button ' + buttonIndex);
+}
 }
 
 </script>
