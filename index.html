@@ -9,7 +9,16 @@
 
     function boton1() {
      
-        navigator.notification.alert('Esta es una alerta desde un botón');
+        function alertDismissed() {
+    // do something
+}
+
+navigator.notification.alert(
+    'You are the winner!',  // message
+    alertDismissed,         // callback
+    'Game Over',            // title
+    'Done'                  // buttonName
+);
         
 }
 
