@@ -9,15 +9,17 @@
 
 
 function boton1() {
-navigator.notification.confirm(
-    'Decíde', // Subtitulo de la ventanita o texto
-     onConfirm,            // llamada al metodo que menciona que botón se oprimió
-    'Confirma Si o No',           // Título de la ventanita
-    ['Si','No']     // titulo de cada botón el elemento más al final en el arreglo será el más a la izquierda 
-);
-    function onConfirm(buttonIndex) { //este metodo es la función que el confirm llamará
-    alert('Presionaste el botón número' + buttonIndex);
+function onPrompt(results) {
+    alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
 }
+
+navigator.notification.prompt(
+    'Please enter your name',  // message
+    onPrompt,                  // callback to invoke
+    'Registration',            // title
+    ['Ok','Exit'],             // buttonLabels
+    'Jane Doe'                 // defaultText
+);
 }
 
 </script>
