@@ -13,7 +13,16 @@ var element = document.getElementById('appInfo');
 //running the application
 element.innerHTML = 'PhoneGap (version ' +
 device.phonegap + ')<br />' + device.platform + ' ' +
-device.name + ' (version ' + device.version + ').';
+device.name + ' (version ' + device.version + ').' <br />
+  +device.cordova+
+device.model+
+device.platform+
+device.uuid+
+device.version+
+device.manufacturer+
+device.isVirtual+
+device.serial
+  ;
 }
 </script>
 </head>
