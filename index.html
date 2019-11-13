@@ -3,46 +3,59 @@
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
+    //Accelerometer content
+var ac;
+//PhoneGap Ready variable
+var pgr = false;
 function onBodyLoad() {
-document.addEventListener("deviceready", onDeviceReady,
-false);
+document.addEventListener("deviceready", onDeviceReady, false);
 }
 function onDeviceReady() {
-//Get the appInfo DOM element
-var element = document.getElementById('appInfo');
-//replace it with specific information about the device
-//running the application
-element.innerHTML = 'PhoneGap version: ' + device.cordova + '<br />'+
-'Plataforma: '+ device.platform +'<br />'+ 
-'Modelo: '+device.model +'<br />'+ 
- 'Version SO ' + device.version + '<br />'+
- 'Plataforma:'+device.platform+ '<br />'+
- 'UUID: '+device.uuid + '<br />'+
- 'Fabricante:' +device.manufacturer+ '<br />'+
- 'Es virtualizado?: '+device.isVirtual+ '<br />'+
- 'No. Serie:'+device.serial;
+//Get a handle we'll use to adjust the accelerometer
+//content
+ac = document.getElementById('accelInfo');
+//Set the variable that lets other parts of the program
+//know that PhoneGap is initialized
+pgr = true;
+}
+function getAcceleration() {
+if (pgr == true) {
+//Clear the current orientation
+ac.innerHTML = "";
+//get the current orientation
+navigator.accelerometer.getCurrentAcceleration(
+onAccelSuccess, onAccelFailure);
+} else {
+alert("Please wait,\nPhoneGap is not ready.");
+}
+}
+function onAccelSuccess(accel) {
+//We received something from the API, so...
+//first get the timestamp in a date object
+//so we can work with it
+var d = new Date(accel.timestamp);
+//Then replace the page's content with the
+//current acceleration retrieved from the API
+ac.innerHTML = "<b>Current acceleration</b><hr />X: " +
+accel.x + "<br />Y: " + accel.y + "<br />Z: " +
+accel.z + "<br />Timestamp: " + d.toLocaleString() +
+"<hr />Click the button to refresh.";
+}
+function onAccelFailure() {
+alert("Accelerometer error!");
 }
 </script>
 </head>
 <body onload="onBodyLoad()">
-<div data-role="page">
-<div data-role="header" data-position="fixed">
-<h1>Version Android JQuery</h1>
-</div>
-<div data-role="content">
-<p>Esta aplicación muestra información nativa del dispositivo</p>
-<p id="appInfo" style="font-size:20px;">En espera de la inicialización</p>
-</div>
-<div data-role="footer" data-position="fixed">
-<h1>Esenciales Cordova</h1>
-</div>
-</div>
+<h1>Example 10-1</h1>
+<p>This is a PhoneGap application that measures
+Device acceleration using the Accelerometer API.</p>
+<p><input type="button"
+value="Refresh Orientation" onclick="getAcceleration();">
+</p>
+<p id="accelInfo">Nothing to see here (yet),
+click the button.</p>
 </body>
 </html>
