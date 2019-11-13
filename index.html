@@ -19,7 +19,15 @@ function onDeviceReady() {
 var element = document.getElementById('appInfo');
 //replace it with specific information about the device
 //running the application
-element.innerHTML = 'PhoneGap (version ' + device.phonegap + ')<br />' + device.platform + ' ' +device.name + ' (version ' + device.version + ').';
+element.innerHTML = 'PhoneGap version: ' + device.cordova + '<br />'+
+'Plataforma: '+ device.platform +'<br />'+ 
+'Modelo: '+device.model +'<br />'+ 
+ 'Version SO ' + device.version + '<br />'+
+ 'Plataforma:'+device.platform+ '<br />'+
+ 'UUID: '+device.uuid + '<br />'+
+ 'Fabricante:' +device.manufacturer+ '<br />'+
+ 'Es virtualizado?: '+device.isVirtual+ '<br />'+
+ 'No. Serie:'+device.serial;
 }
 </script>
 </head>
