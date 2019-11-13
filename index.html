@@ -3,32 +3,38 @@
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
-function onBodyLoad() { document.addEventListener("deviceready", onDeviceReady,false);}
+function onBodyLoad() {
+document.addEventListener("deviceready", onDeviceReady,
+false);
+}
 function onDeviceReady() {
 //Get the appInfo DOM element
 var element = document.getElementById('appInfo');
 //replace it with specific information about the device
 //running the application
-element.innerHTML = 'PhoneGap (version ' +
-device.phonegap + ')<br />' + device.platform + ' ' +
-device.name + ' (version ' + device.version + ').' <br />
-  +device.cordova+
-device.model+
-device.platform+
-device.uuid+
-device.version+
-device.manufacturer+
-device.isVirtual+
-device.serial
-  ;
+element.innerHTML = 'PhoneGap (version ' + device.phonegap + ')<br />' + device.platform + ' ' +device.name + ' (version ' + device.version + ').';
 }
 </script>
 </head>
 <body onload="onBodyLoad()">
-<h1>Version Android</h1>
-<p>Esta es una aplicacion para ver la version Android</p>
-<p id="appInfo">Esta es la informacion inicial</p>
+<div data-role="page">
+<div data-role="header" data-position="fixed">
+<h1>Version Android JQuery</h1>
+</div>
+<div data-role="content">
+<p>Esta aplicación muestra información nativa del dispositivo</p>
+<p id="appInfo">En espera de la inicialización</p>
+</div>
+<div data-role="footer" data-position="fixed">
+<h1>Esenciales Cordova</h1>
+</div>
+</div>
 </body>
 </html>
