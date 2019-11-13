@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-type" content="text/html;
-charset=utf-8">
-<meta name="viewport" id="viewport"
-content="width=device-width, height=device-height,
-initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"
-/>
-<script type="text/javascript" charset="utf-8"
-src="phonegap.js"></script>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" id="viewport" content="width=device-width, height=device-height,initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"/>
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
 // Accelerometer watcher ID
 var awID;
@@ -41,14 +36,19 @@ alert("Accelerometer error! Clearing Watch ID");
 //Cancel the watch
 navigator.accelerometer.clearWatch(awID);
 }
+
+function goToURL(val){
+location.href = val;
+}
+
 </script>
 </head>
 <body onload="onBodyLoad()">
-    <h1>Example 10-2</h1>
-    <p>Apache PhoneGap Accelerometer Watcher</p>
-    <p><b>Current Orientation</b><hr /></p>
-    <p id="accelInfo">Waiting for PhoneGap to initialize.
-    </p>
+    <h1>Acelerometro 10-2</h1>
+    <p>Acelerometro versión 2, en tiempo real</p>
+    <p><b>Orientación Actual</b><hr /></p>
+    <p id="accelInfo">Esperando a que PhoneGap inicialice</p>
     <hr />
+    <button ONCLICK="javascript:goToURL('index.html')" style="width: 100%;">Version 1.0</button>
     </body>
     </html>
