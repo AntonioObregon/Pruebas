@@ -11,13 +11,30 @@ initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"
 <script type="text/javascript" charset="utf-8"
 src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
-document.addEventListener("deviceready", onDeviceReady, false);
+function onBodyLoad() {
+document.addEventListener("deviceready", onDeviceReady,
+false);
+}
 function onDeviceReady() {
-    console.log(navigator.camera);
+navigator.notification.alert("onDeviceReady");
+}
+function takePhoto() {
+    navigator.camera.getPicture(onSuccess, onFail, { quality: 25,
+    destinationType: Camera.DestinationType.DATA_URL
+});
+}
+
+function onSuccess(imageData) {
+    var image = document.getElementById('myImage');
+    image.src = "data:image/jpeg;base64," + imageData;
+}
+
+function onFail(message) {
+    alert('Failed because: ' + message);
 }
 </script>
 </head>
-<body onload="onDeviceReady()">
+<body onload="onBodyLoad()">
     <h1>Example 11-1</h1>
     <p>Using the PhoneGap Camera API<br />
     <input type="button" value="Take a Picture"
