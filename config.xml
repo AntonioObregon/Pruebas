@@ -1,17 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>pruebaCam</name>
+<widget id="io.cordova.hellocordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>Holamundo01</name>
   <description>
-      Esta es una aplicacion para trabajar con el acelerometro
+      Esta es una aplicacion basica de PhoneGap
   </description>
   <author email="dev@cordova.apache.org" href="http://cordova.io">
       Antonio de Jesus Obregon Prieto
   </author>
   <content src="index.html" />
   <plugin name="cordova-plugin-whitelist" spec="1" />
-  <plugin name="cordova-plugin-dialogs"/>
-  <plugin name="cordova-plugin-device"/> 
-  <plugin name="cordova-plugin-device-motion"/>
   <plugin name="cordova-plugin-camera"/>
   <access origin="*" />
   <allow-intent href="http://*/*" />
