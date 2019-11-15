@@ -1,71 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
-<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+<title>Example 11-1</title>
+<meta http-equiv="Content-type" content="text/html;
+charset=utf-8">
+<meta name="viewport" id="viewport"
+content="width=device-width, height=device-height,
+initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"
+/>
+<script type="text/javascript" charset="utf-8"
+src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
-    //Accelerometer content
-var ac;
-//PhoneGap Ready variable
-var pgr = false;
 function onBodyLoad() {
-document.addEventListener("deviceready", onDeviceReady, false);
+document.addEventListener("deviceready", onDeviceReady,
+false);
 }
 function onDeviceReady() {
-//Get a handle we'll use to adjust the accelerometer
-//content
-ac = document.getElementById('accelInfo');
-//Set the variable that lets other parts of the program
-//know that PhoneGap is initialized
-pgr = true;
+navigator.notification.alert("onDeviceReady");
 }
-function getAcceleration() {
-if (pgr == true) {
-//Clear the current orientation
-ac.innerHTML = "";
-//get the current orientation
-navigator.accelerometer.getCurrentAcceleration(
-onAccelSuccess, onAccelFailure);
-} else {
-alert("Espera por favor,\nPhoneGap no está listo.");
+function takePhoto() {
+navigator.camera.getPicture(onCameraSuccess,
+onCameraError);
 }
+function onCameraSuccess(imageURL) {
+navigator.notification.alert("onCameraSuccess: " +
+imageURL);
 }
-function onAccelSuccess(accel) {
-//We received something from the API, so...
-//first get the timestamp in a date object
-//so we can work with it
-var d = new Date(accel.timestamp);
-//Then replace the page's content with the
-//current acceleration retrieved from the API
-ac.innerHTML = "<b>Datos actuales del acelerómetro</b><hr />X: " +
-accel.x + "<br />Y: " + accel.y + "<br />Z: " +
-accel.z + "<br />Fecha y hora: " + d.toLocaleString() +
-"<hr />Tap en el botón para actualizar.";
+function onCameraError(e) {
+navigator.notification.alert("onCameraError: " + e);
 }
-function onAccelFailure() {
-alert("Accelerometer error!");
-}
-
-
-function goToURL(val){
-location.href = val;
-}
-
-</script>
-
 </script>
 </head>
 <body onload="onBodyLoad()">
-<h1>Acelerometro 10-1</h1>
-<p>Esta es una aplicación de PhoneGap que muestra los datos del acelerómetro usando la API Acelerómetro.</p>
-<p><input type="button"
-value="Refrescar la orientation" onclick="getAcceleration();">
-</p>
-<p id="accelInfo"  style="font-size: 20px;">Nothing to see here (yet),
-click the button.</p>
-
-<button ONCLICK="javascript:goToURL('segunda.html')" style="width: 100%;">Version 2.0</button>
-
-</body>
-</html>
+    <h1>Example 11-1</h1>
+    <p>Using the PhoneGap Camera API<br />
+    <input type="button" value="Take a Picture"
+    onclick="takePhoto();">
+    </p>
+    </body>
+    </html>

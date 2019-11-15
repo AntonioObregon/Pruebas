@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>prueba acc</name>
+  <name>pruebaCam</name>
   <description>
       Esta es una aplicacion para trabajar con el acelerometro
   </description>
@@ -12,6 +12,7 @@
   <plugin name="cordova-plugin-dialogs"/>
   <plugin name="cordova-plugin-device"/>
   <plugin name="cordova-plugin-device-motion"/>
+  <plugin name="cordova-plugin-camera"/>
   
     <access origin="*" />
   <allow-intent href="http://*/*" />
