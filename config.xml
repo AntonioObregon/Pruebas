@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>pruebaCam</name>
+  <name>pruebaGrab</name>
   <description>
-      Esta es una aplicacion para trabajar con el acelerometro
+      Esta es una aplicacion para trabajar con la grabacion
   </description>
   <author email="dev@cordova.apache.org" href="http://cordova.io">
       Antonio de Jesus Obregon Prieto
@@ -13,10 +13,7 @@
   <plugin name="cordova-plugin-device"/> 
   <plugin name="cordova-plugin-device-motion"/>
   <plugin name="cordova-plugin-camera"/>
-  <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
-    <string>need camera access to take pictures</string>
-</edit-config>
-
+  <plugin name="cordova-plugin-media-capture"/>
   <access origin="*" />
   <allow-intent href="http://*/*" />
   <allow-intent href="https://*/*" />
