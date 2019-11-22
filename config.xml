@@ -1,6 +1,6 @@
 <widget id="io.cordova.camara" version="1.5.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="phonegap-version" value="cli-9.0.0" />
-  <name>pruebaCam</name>
+  <name>pruebaCam-2</name>
   <description>
       Esta es una aplicacion para trabajar con la camara
   </description>
