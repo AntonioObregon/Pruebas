@@ -9,6 +9,8 @@
       Antonio de Jesus Obregon Prieto
   </author>
   <content src="index.html" />
+  <plugin name="Compass" value="CDVLocation" />
+  <plugin name="Compass" value="org.apache.cordova.CompassListener" />
   <plugin name="cordova-plugin-whitelist" spec="1" />
   <plugin name="cordova-plugin-dialogs"/>
   <plugin name="cordova-plugin-device"/> 
