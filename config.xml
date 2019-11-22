@@ -9,8 +9,9 @@
       Antonio de Jesus Obregon Prieto
   </author>
   <content src="index.html" />
-  
-  <plugin name="Compass" value="org.apache.cordova.CompassListener" />
+  <feature name="Compass">
+    <param name="android-package" value="org.apache.cordova.deviceorientation.CompassListener" />
+</feature>
   <plugin name="cordova-plugin-whitelist" spec="1" />
   <plugin name="cordova-plugin-dialogs"/>
   <plugin name="cordova-plugin-device"/> 
