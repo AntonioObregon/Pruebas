@@ -11,7 +11,7 @@
     <script src="http://cdn.sobekrepository.org/includes/jquery-rotate/2.2/jquery-rotate.min.js"></script>
 <script src="http://cdn.sobekrepository.org/includes/jquery-rotate/2.2/jquery-rotate.js"></script>
     <script type="text/javascript" charset="utf-8" src="jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="jQueryRotate.2.1.js"></script>
+<script type="text/javascript" charset="utf-8" src="jQueryRotate.2.2.js"></script>
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
     var hi, watchID;
@@ -25,9 +25,7 @@
     //Set up the watch
     //Read the compass 4 times a second
     var watchOptions = { frequency: 250 };
-    watchID = navigator.compass.watchHeading(
-    onHeadingSuccess, onHeadingError, watchOptions);
-    }
+    watchID = navigator.compass.watchHeading( onHeadingSuccess, onHeadingError, watchOptions); }
     function onHeadingSuccess(heading) {
     var hv = Math.round(heading.magneticHeading);
     hi.innerHTML = "<b>Heading:</b>" + hv + " degrees";
@@ -39,8 +37,7 @@
     //clear the Heading value from the page
     hi.innerHTML = "";
     //Then tell the user what happened.
-    if (compassError.code ==
-    CompassError.COMPASS_NOT_SUPPORTED) {
+    if (compassError.code == CompassError.COMPASS_NOT_SUPPORTED) {
     alert("Compass not supported.");
     } else if (compassError.code ==
     CompassError.COMPASS_INTERNAL_ERR) {
