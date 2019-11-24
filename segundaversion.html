@@ -5,20 +5,19 @@
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
 
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <script src="http://cdn.sobekrepository.org/includes/jquery-rotate/2.2/jquery-rotate.min.js"></script>
-<script src="http://cdn.sobekrepository.org/includes/jquery-rotate/2.2/jquery-rotate.js"></script>
-    <script type="text/javascript" charset="utf-8" src="jquery.js"></script>
-    <script src="http://code.jquery.com/jquery-2.1.1.js"></script>
-<script type="text/javascript" charset="utf-8" src="jQueryRotate.2.1.js"></script>
+<script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+<script type="text/javascript" charset="utf-8" src="jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="jQueryRotate.2.2.js"></script>
+<script type="text/javascript" charset="utf-8" src="jquery.rotate.js"></script>
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
+    
     var hi, watchID;
     function onBodyLoad() {
-    document.addEventListener("deviceready", onDeviceReady,
-    false);
+    document.addEventListener("deviceready", onDeviceReady, false);
     //Get a handle to the headingInfo element of the page
     hi = document.getElementById('headingInfo');
     }
@@ -26,19 +25,24 @@
     //Set up the watch
     //Read the compass 4 times a second
     var watchOptions = { frequency: 250 };
-    watchID = navigator.compass.watchHeading( onHeadingSuccess, onHeadingError, watchOptions); }
-    function onHeadingSuccess(heading) {
-    var hv = Math.round(heading.magneticHeading);
-    hi.innerHTML = "<b>Heading:</b>" + hv + " degrees";
-    $('#compass').rotate(-hv);
+    watchID = navigator.compass.watchHeading( onHeadingSuccess, onHeadingError, watchOptions);
     }
+    
+    function onHeadingSuccess(heading) {
+
+        var hv = Math.round(heading.magneticHeading);
+        hi.innerHTML = "<b>Heading:</b>" + hv + " degrees";
+        $("#compass").rotate(-hv);
+            }
+
     function onHeadingError(compassError) {
     //Remove the watch since we're having a problem
     navigator.compass.clearWatch(watchID);
     //clear the Heading value from the page
     hi.innerHTML = "";
     //Then tell the user what happened.
-    if (compassError.code == CompassError.COMPASS_NOT_SUPPORTED) {
+    if (compassError.code ==
+    CompassError.COMPASS_NOT_SUPPORTED) {
     alert("Compass not supported.");
     } else if (compassError.code ==
     CompassError.COMPASS_INTERNAL_ERR) {
@@ -56,7 +60,7 @@ location.href = val;
     </script>
     </head>
     <body onload="onBodyLoad()">
-    <h1>Example 13-2</h1>
+    <h1>Ejemplo 13-2</h1>
     <img src="compass.png" id="compass" align="middle"/><br />
     <p id="headingInfo"></p>
     <button ONCLICK="javascript:goToURL('index.html')" style="width: 100%;">Version 1.0</button>
