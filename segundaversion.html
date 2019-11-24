@@ -28,8 +28,11 @@
         hi.innerHTML = "<b>Heading:</b>" + hv + " degrees";
         
         
-	$('#compass').css('rotate', -hv);
-    }
+	$('#compass').animate({rotate: '-hv'}, 2000);
+
+
+        
+            }
 
     function onHeadingError(compassError) {
     //Remove the watch since we're having a problem
