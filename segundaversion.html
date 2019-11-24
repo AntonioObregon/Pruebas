@@ -29,7 +29,7 @@
     function onHeadingSuccess(heading) {
     var hv = Math.round(heading.magneticHeading);
     hi.innerHTML = "<b>Heading:</b>" + hv + " degrees";
-    $("#compass").rotate(-hv);
+    $('#compass').rotate(-hv);
     }
     function onHeadingError(compassError) {
     //Remove the watch since we're having a problem
