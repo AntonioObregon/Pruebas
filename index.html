@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Example 13-1</title>
+<title>Ejemplo 13-1</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;"/>
 <script type="text/javascript" charset="utf-8"src="phonegap.js"></script>
@@ -29,10 +29,9 @@ if (pgr == true) {
 if (hasCompass == true) {
 //Clear the current heading content,
 //just in case it takes some time to get the reading
-hc.innerHTML ="Getting heading information from compass.";
+hc.innerHTML ="Obteniendo la información de la Brújula.";
 //get the current heading
-navigator.compass.getCurrentHeading(
-onHeadingSuccess, onHeadingError);
+navigator.compass.getCurrentHeading(onHeadingSuccess, onHeadingError);
 } else {
 alert("No compass, please stop clicking the button.");
 }
@@ -46,8 +45,8 @@ function onHeadingSuccess(heading) {
 //so we can work with it
 var d = new Date(heading.timestamp);//Then replace the page's content with the
 //current acceleration retrieved from the API
-hc.innerHTML = "<b>Magnetic Heading:</b> " +
-heading.magneticHeading + "<br /><b>True Heading:</b> " + heading.trueHeading + "<br /><b>Heading Accuracy:</b> " + heading.headingAccuracy + "<br /><b>Timestamp:</b> " + d.toLocaleString();
+hc.innerHTML = "<b>Rumbo magnético:</b> " +
+heading.magneticHeading + "<br /><b>Rumbo real:</b> " + heading.trueHeading + "<br /><b>Precisión del rumbo:</b> " + heading.headingAccuracy + "<br /><b>Marca de tiempo:</b> " + d.toLocaleString();
 }
 function onHeadingError(compassError) {
 if (compassError.code ==
@@ -61,14 +60,19 @@ alert("Compass Internal Error");
 alert("Unknown heading error!");
 }
 }
+
+function goToURL(val){
+location.href = val;
+}
+
 </script>
 </head>
 <body onload="onBodyLoad()">
 <h1>Example 13-1</h1>
-<p>This is an Apache PhoneGap application that measures
-device heading using the Compass API.<br />
+<p>Esta es una aplicacion que mide el rumbo magnético del dispositivo utilizando la API brújula.<br />
 <input type="button" value="Measure Heading"
 onclick="getHeading();"></p>
-<p id="headingInfo">Nothing to see here (yet), click the
-button.</p>
-</body>
+<p id="headingInfo"> Nada que vere por aquí (aún) Has tap en el botón.</p>
+<button ONCLICK="javascript:goToURL('segundaversion.html')" style="width: 100%;">Version 2.0</button>
+    </body>
+    </html>
