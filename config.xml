@@ -17,6 +17,7 @@
   <plugin name="cordova-plugin-device-motion"/>
   <plugin name="cordova-plugin-camera"/>
   <plugin name="cordova-plugin-media-capture"/>
+  <plugin name="cordova-plugin-device-orientation"/>
   <access origin="*" />
   <allow-intent href="http://*/*" />
   <allow-intent href="https://*/*" />
