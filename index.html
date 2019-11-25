@@ -12,44 +12,62 @@
 <script type="text/javascript" charset="utf-8">
 
 
+var states = {};
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.CELL]     = 'Cell generic connection';
+        states[Connection.NONE]     = 'No network connection';
+
 
 function onBodyLoad() {
-document.addEventListener("deviceready", onDeviceReady, false);
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    var contador;
+for (contador = -1; contador < 0; i--) {
+    getConnectionTypeStr();
 }
+
+}
+
 function onDeviceReady() {
-navigator.notification.alert("PhoneGap is ready!");
+            navigator.notification.alert("PhoneGap is ready!");
 
-document.addEventListener("online", isOnline, false);
+            document.addEventListener("online", isOnline, false);
 
-document.addEventListener("offline", isOffline, false);
+            document.addEventListener("offline", isOffline, false);
 }
+
+
 function isOnline() {
-var d = new Date();
-$('#networkInfo').prepend("Online (" + getConnectionTypeStr() + ")<br />"); }
-function isOffline() { var d = new Date(); $('#networkInfo').prepend("Offline<br />"); }
+        var d = new Date();
+        $('#networkInfo').prepend("Online (" + getConnectionTypeStr() + ")<br />"); 
+        }
+
+function isOffline() {
+                     var d = new Date(); $('#networkInfo').prepend("Offline<br />"); 
+                        }
 
 function getConnectionTypeStr() {
-
-
-    var states = {};
-states[Connection.UNKNOWN] = 'Unknown';
-states[Connection.ETHERNET] = 'Ethernet';
-states[Connection.WIFI] = 'Wi-Fi';
-states[Connection.CELL_2G] = 'Cell 2G';
-states[Connection.CELL_3G] = 'Cell 3G';
-states[Connection.CELL_4G] = 'Cell 4G';
-states[Connection.NONE] = 'No network';
-
 
     var networkState = navigator.connection.type;
 
 return states[networkState];
+
+
+
 }
 </script>
 </head>
 <body onload="onBodyLoad()">
 <h1>Ejemplo 14-1</h1>
 <p id="networkInfo"></p>
+
+
+
 </body>
 </body>
 </html>
