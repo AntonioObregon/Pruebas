@@ -32,7 +32,7 @@
             }
 
 	function rotateImage(degree) {
-        $('#compass').animate({  borderSpacing: degree }, {
+        $('#compass').animate({  borderSpacing: -degree }, {
     step: function(now,fx) {
       $(this).css('-webkit-transform','rotate('+now+'deg)'); 
       $(this).css('-moz-transform','rotate('+now+'deg)');
