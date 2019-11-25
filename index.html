@@ -13,14 +13,7 @@
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
 
-            var states = {};
-            states[Connection.UNKNOWN] = 'Unknown';
-            states[Connection.ETHERNET] = 'Ethernet';
-            states[Connection.WIFI] = 'Wi-Fi';
-            states[Connection.CELL_2G] = 'Cell 2G';
-            states[Connection.CELL_3G] = 'Cell 3G';
-            states[Connection.CELL_4G] = 'Cell 4G';
-            states[Connection.NONE] = 'No network';
+          
 
 
 function onBodyLoad() {
@@ -45,6 +38,15 @@ function isOffline() {
 }
 function getConnectionTypeStr() {
 
+              var states = {};
+            states[Connection.UNKNOWN] = 'Unknown';
+            states[Connection.ETHERNET] = 'Ethernet';
+            states[Connection.WIFI] = 'Wi-Fi';
+            states[Connection.CELL_2G] = 'Cell 2G';
+            states[Connection.CELL_3G] = 'Cell 3G';
+            states[Connection.CELL_4G] = 'Cell 4G';
+            states[Connection.NONE] = 'No network';
+            
     var networkState = navigator.connection.type;
 
                 return states[networkState];
