@@ -28,6 +28,8 @@ false);
 function onDeviceReady() {
 navigator.notification.alert("PhoneGap is ready!");
 
+    checkConnection();
+    
 document.addEventListener("online", isOnline, false);
 
 document.addEventListener("offline", isOffline, false);
@@ -65,7 +67,7 @@ function checkConnection() {
     alert('Connection type: ' + states[networkState]);
 }
 
-checkConnection();
+
 
 </script>
 </head>
