@@ -37,10 +37,7 @@ function onDeviceReady() {
 
             document.addEventListener("offline", isOffline, false);
            
-            var contador;
-for (contador = -1; contador < 0; i--) {
-    getConnectionTypeStr();
-}
+
 }
 
 
@@ -58,17 +55,16 @@ function getConnectionTypeStr() {
     var networkState = navigator.connection.type;
 
 return states[networkState];
-
-
-
 }
+
+
 </script>
 </head>
 <body onload="onBodyLoad()">
 <h1>Ejemplo 14-1</h1>
-<p id="networkInfo"></p>
+<p id="networkInfo"></p> 
 
-
+<input type="button" value="Take a Picture" onclick="takePhoto();">
 
 </body>
 </body>
