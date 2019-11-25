@@ -13,7 +13,7 @@
 
 
   // the outer part of the compass that rotates
-  var rose = document.getElementById("rose");
+  var rose = document.getElementById("compass");
 
 
   // elements that ouput our position
