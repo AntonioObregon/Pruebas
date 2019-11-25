@@ -27,7 +27,16 @@
         var hv = Math.round(heading.magneticHeading);
         hi.innerHTML = "<b>Heading:</b>" + hv + " degrees";
         
-               
+            $('#compass').animate({  transform: hv }, {
+        step: function(now,fx) {
+            $(this).css({
+                '-webkit-transform':'rotate('+now+'deg)', 
+                '-moz-transform':'rotate('+now+'deg)',
+                'transform':'rotate('+now+'deg)'
+            });
+        }
+        });   
+	    
             }
 
     function onHeadingError(compassError) {
@@ -47,17 +56,7 @@
     }
     }
 
-	    function rotateImage(hv) {
-        $('#compass').animate({  transform: hv }, {
-        step: function(now,fx) {
-            $(this).css({
-                '-webkit-transform':'rotate('+now+'deg)', 
-                '-moz-transform':'rotate('+now+'deg)',
-                'transform':'rotate('+now+'deg)'
-            });
-        }
-        });
-    }
+	   
 
     function goToURL(val){
 location.href = val;
@@ -65,7 +64,7 @@ location.href = val;
 
     </script>
     </head>
-    <body onload="onBodyLoad(), rotateImage()">
+    <body onload="onBodyLoad()">
     <h1>Ejemplo 13-2</h1>
     <img src="compass.png" id="compass" align="middle"/><br />
     <p id="headingInfo"></p>
