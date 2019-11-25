@@ -24,12 +24,14 @@ states[Connection.NONE] = 'No network';
 function onBodyLoad() {
 document.addEventListener("deviceready", onDeviceReady,
 false);
+
 }
 function onDeviceReady() {
+
+
+
 navigator.notification.alert("PhoneGap is ready!");
 
-    checkConnection();
-    
 document.addEventListener("online", isOnline, false);
 
 document.addEventListener("offline", isOffline, false);
@@ -52,6 +54,7 @@ return states[networkState];
 
 
 function checkConnection() {
+    
     var networkState = navigator.connection.type;
 
     var states = {};
@@ -65,9 +68,12 @@ function checkConnection() {
     states[Connection.NONE]     = 'No network connection';
 
     alert('Connection type: ' + states[networkState]);
+    
+        states.forEach(element => alert(element));
+    
 }
 
-
+checkConnection();
 
 </script>
 </head>
