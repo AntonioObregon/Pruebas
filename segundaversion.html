@@ -27,7 +27,12 @@
         var hv = Math.round(heading.magneticHeading);
         hi.innerHTML = "<b>Heading:</b>" + hv + " degrees";
         
-                 $('#compass').animate({  transform: 90 }, {
+               rotateImage(hv);
+	    
+            }
+
+	function rotateImage(degree) {
+        $('#compass').animate({  transform: degree }, {
         step: function(now,fx) {
             $(this).css({
                 '-webkit-transform':'rotate('+now+'deg)', 
@@ -35,10 +40,9 @@
                 'transform':'rotate('+now+'deg)'
             });
         }
-        }); 
-	    
-            }
-
+        });
+    }
+	
     function onHeadingError(compassError) {
     //Remove the watch since we're having a problem
     navigator.compass.clearWatch(watchID);
