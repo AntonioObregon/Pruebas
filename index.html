@@ -13,7 +13,7 @@
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
 
-          
+           
 
 
 function onBodyLoad() {
@@ -28,6 +28,15 @@ function onDeviceReady() {
                 document.addEventListener("offline", isOffline, false);
 }
 
+function tiemporeal(contador)
+{
+    var contador;
+for (contador; contador < 0; i--) {
+    isOnline();
+}
+
+}
+
 function isOnline() {
                         var d = new Date();
                         $('#networkInfo').prepend("Online (" + getConnectionTypeStr() + ")<br />");
@@ -38,15 +47,16 @@ function isOffline() {
 }
 function getConnectionTypeStr() {
 
-              var states = {};
-            states[Connection.UNKNOWN] = 'Unknown';
-            states[Connection.ETHERNET] = 'Ethernet';
-            states[Connection.WIFI] = 'Wi-Fi';
-            states[Connection.CELL_2G] = 'Cell 2G';
-            states[Connection.CELL_3G] = 'Cell 3G';
-            states[Connection.CELL_4G] = 'Cell 4G';
-            states[Connection.NONE] = 'No network';
-            
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Unknown connection';
+    states[Connection.ETHERNET] = 'Ethernet connection';
+    states[Connection.WIFI]     = 'WiFi connection';
+    states[Connection.CELL_2G]  = 'Cell 2G connection';
+    states[Connection.CELL_3G]  = 'Cell 3G connection';
+    states[Connection.CELL_4G]  = 'Cell 4G connection';
+    states[Connection.CELL]     = 'Cell generic connection';
+    states[Connection.NONE]     = 'No network connection';
+
     var networkState = navigator.connection.type;
 
                 return states[networkState];
@@ -58,6 +68,11 @@ function getConnectionTypeStr() {
 <body onload="onBodyLoad()">
 <h1>Example 14-1</h1>
 <p id="networkInfo"></p>
+<input type="button" value="Reload" onclick="isOnline();">
+
+
+<input type="button" value="-1" onClick="tiemporeal(this.value);" />
+<input type="button" value="1" onClick="tiemporeal(this.value);" />
 </body>
 </body>
 </html>
