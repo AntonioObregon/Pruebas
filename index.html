@@ -13,14 +13,13 @@
 
 
 var states = {};
-        states[Connection.UNKNOWN]  = 'Unknown connection';
-        states[Connection.ETHERNET] = 'Ethernet connection';
-        states[Connection.WIFI]     = 'WiFi connection';
-        states[Connection.CELL_2G]  = 'Cell 2G connection';
-        states[Connection.CELL_3G]  = 'Cell 3G connection';
-        states[Connection.CELL_4G]  = 'Cell 4G connection';
-        states[Connection.CELL]     = 'Cell generic connection';
-        states[Connection.NONE]     = 'No network connection';
+states[Connection.UNKNOWN] = 'Unknown';
+states[Connection.ETHERNET] = 'Ethernet';
+states[Connection.WIFI] = 'Wi-Fi';
+states[Connection.CELL_2G] = 'Cell 2G';
+states[Connection.CELL_3G] = 'Cell 3G';
+states[Connection.CELL_4G] = 'Cell 4G';
+states[Connection.NONE] = 'No network';
 
 
 function onBodyLoad() {
@@ -64,7 +63,7 @@ return states[networkState];
 <h1>Ejemplo 14-1</h1>
 <p id="networkInfo"></p> 
 
-<input type="button" value="Take a Picture" onclick="takePhoto();">
+<input type="button" value="Reload" onclick="isOnline();">
 
 </body>
 </body>
