@@ -7,29 +7,16 @@
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
 <script type="text/javascript" charset="utf-8" src="jquery.js"></script>
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
 
-var states = {};
-states[Connection.UNKNOWN] = 'Unknown';
-states[Connection.ETHERNET] = 'Ethernet';
-states[Connection.WIFI] = 'Wi-Fi';
-states[Connection.CELL_2G] = 'Cell 2G';
-states[Connection.CELL_3G] = 'Cell 3G';
-states[Connection.CELL_4G] = 'Cell 4G';
-states[Connection.NONE] = 'No network';
+
 
 function onBodyLoad() {
-document.addEventListener("deviceready", onDeviceReady,
-false);
-
+document.addEventListener("deviceready", onDeviceReady, false);
 }
 function onDeviceReady() {
-
-
-
 navigator.notification.alert("PhoneGap is ready!");
 
 document.addEventListener("online", isOnline, false);
@@ -38,43 +25,26 @@ document.addEventListener("offline", isOffline, false);
 }
 function isOnline() {
 var d = new Date();
-$('#networkInfo').prepend("Online (" +
-getConnectionTypeStr() + ")<br />");
-}
-function isOffline() {
-var d = new Date();
-$('#networkInfo').prepend("Offline<br />");
-}
+$('#networkInfo').prepend("Online (" + getConnectionTypeStr() + ")<br />"); }
+function isOffline() { var d = new Date(); $('#networkInfo').prepend("Offline<br />"); }
+
 function getConnectionTypeStr() {
 
-var networkState = navigator.connection.type;
+
+    var states = {};
+states[Connection.UNKNOWN] = 'Unknown';
+states[Connection.ETHERNET] = 'Ethernet';
+states[Connection.WIFI] = 'Wi-Fi';
+states[Connection.CELL_2G] = 'Cell 2G';
+states[Connection.CELL_3G] = 'Cell 3G';
+states[Connection.CELL_4G] = 'Cell 4G';
+states[Connection.NONE] = 'No network';
+
+
+    var networkState = navigator.connection.type;
 
 return states[networkState];
 }
-
-
-function checkConnection() {
-    
-    var networkStateX = navigator.connection.type;
-
-    var states = {};
-    states[Connection.UNKNOWN]  = 'Unknown connection';
-    states[Connection.ETHERNET] = 'Ethernet connection';
-    states[Connection.WIFI]     = 'WiFi connection';
-    states[Connection.CELL_2G]  = 'Cell 2G connection';
-    states[Connection.CELL_3G]  = 'Cell 3G connection';
-    states[Connection.CELL_4G]  = 'Cell 4G connection';
-    states[Connection.CELL]     = 'Cell generic connection';
-    states[Connection.NONE]     = 'No network connection';
-
-    alert('Tipo de conexión: ' + states[networkStateX]);
-    
-    
-    
-}
-
-checkConnection();
-
 </script>
 </head>
 <body onload="onBodyLoad()">
