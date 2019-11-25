@@ -26,10 +26,7 @@ var states = {};
 function onBodyLoad() {
     document.addEventListener("deviceready", onDeviceReady, false);
 
-    var contador;
-for (contador = -1; contador < 0; i--) {
-    getConnectionTypeStr();
-}
+    
 
 }
 
@@ -39,6 +36,11 @@ function onDeviceReady() {
             document.addEventListener("online", isOnline, false);
 
             document.addEventListener("offline", isOffline, false);
+           
+            var contador;
+for (contador = -1; contador < 0; i--) {
+    getConnectionTypeStr();
+}
 }
 
 
