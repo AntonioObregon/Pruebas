@@ -32,15 +32,14 @@
             }
 
 	function rotateImage(degree) {
-        $('#compass').animate({  transform: degree }, {
-        step: function(now,fx) {
-            $(this).css({
-                '-webkit-transform':'rotate('+now+'deg)', 
-                '-moz-transform':'rotate('+now+'deg)',
-                'transform':'rotate('+now+'deg)'
-            });
-        }
-        });
+        $('#compass').animate({  borderSpacing: degree }, {
+    step: function(now,fx) {
+      $(this).css('-webkit-transform','rotate('+now+'deg)'); 
+      $(this).css('-moz-transform','rotate('+now+'deg)');
+      $(this).css('transform','rotate('+now+'deg)');
+    },
+    duration:'slow'
+},'linear');
     }
 	
     function onHeadingError(compassError) {
