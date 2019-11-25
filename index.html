@@ -67,9 +67,9 @@ function checkConnection() {
     states[Connection.CELL]     = 'Cell generic connection';
     states[Connection.NONE]     = 'No network connection';
 
-    alert('Connection type: ' + states[networkState]);
+    alert('Tipo de conexión: ' + states[networkState]);
     
-        states.forEach(element => alert(element));
+    element.innerHTML = 'Tipo de conexión: ' +states[networkState];
     
 }
 
