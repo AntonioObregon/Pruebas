@@ -1,26 +1,19 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <preference name="phonegap-version" value="cli-7.1.0" />
-    <name>pruebaredes</name>
+<widget id="io.cordova.camara" version="1.5.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <preference name="phonegap-version" value="cli-9.0.0" />
+  <name>pruebaContactos</name>
   <description>
-      Esta es una aplicacion para trabajar con la brujula del dispositivo
+      Esta es una aplicacion para trabajar con la camara trallendo consigo la ruta de guardado
   </description>
   <author email="dev@cordova.apache.org" href="http://cordova.io">
       Antonio de Jesus Obregon Prieto
   </author>
   <content src="index.html" />
-    <feature name="Compass">
-    <param name="android-package" value="org.apache.cordova.deviceorientation.CompassListener" />
-</feature>
-    <preference name="Orientation" value="portrait" />
   <plugin name="cordova-plugin-whitelist" spec="1" />
   <plugin name="cordova-plugin-dialogs"/>
   <plugin name="cordova-plugin-device"/> 
   <plugin name="cordova-plugin-device-motion"/>
   <plugin name="cordova-plugin-camera"/>
-  <plugin name="cordova-plugin-media-capture"/>
-  <plugin name="cordova-plugin-device-orientation"/>
-<plugin name="cordova-plugin-network-information"/>
+  <plugin name="cordova-plugin-contacts"/>
   <access origin="*" />
   <allow-intent href="http://*/*" />
   <allow-intent href="https://*/*" />
