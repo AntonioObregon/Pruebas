@@ -10,6 +10,7 @@ $(document).ready(function(){
     
     function searchContacts(c)
     {
+
      var name=$("#searchitin").val();
     
     name = name.toLowerCase();
@@ -18,6 +19,7 @@ $(document).ready(function(){
     
     for(var i=0; len=c.length;i<len; i++)
     { 
+
     if(c[i].name.givenName==name)
     { 
     isfound=true;
@@ -26,7 +28,7 @@ $(document).ready(function(){
     var email = c[i].emails[0].value;
     var phone = c[i].phoneNumber[1].value;
     
-    pair = "<tr><th data-priority=\"1\"><center>Nombre</center></th><center>"firstname+
+    pair = "<tr><th data-priority=\"1\"><center>Nombre</center></th><td><center>"+firstname+
     "</center></td></tr><tr><th data-priority=\"1\"><center>Apellido</center></th><td><center>"+
     fname+
     "</center></td></tr><tr><th data-priority=\"1\"><center>Email</center></th><td><center>"+
@@ -40,9 +42,10 @@ $(document).ready(function(){
     if(isfound==false){
     alert("Contacto no encontrado");
     }
-    }
+}//dizke este no sirve
+
     
-    $("#createContact").click(function(){
+$("#createContact").click(function(){
     
     var name = $("#dname").val();
     var mname = $("#dmname").val();
@@ -111,45 +114,46 @@ $(document).ready(function(){
     "pref":false
     }
     ]
-    });
+
+});
+});
     
     myContact.save();
     alert("El contacto"+myContact.name.givenName+" ha sido creado");
-    });
     
     $(document).on('click','#getContact', function(){
     
-    navigator.contacts.find(
-    [navigator.contacts.fieldType.name],
-    gotContacts,
-    errorHandler);
-    });
+        navigator.contacts.find(
+        [navigator.contacts.fieldType.name],
+        gotContacts,
+        errorHandler);
+        });
+        
+        function gotContacts(c)
+        {
+        console.log("gotContacts, numer of results ", c.length);
+        
+        var pair="<tr><th data-priority=\"1\"><center>Nombre</center></th><th data-priority=\"1\"><center>Apellido</center></th><th data-priority=\"2\"><center>Email</center></th><th><center>Numero</center></th></tr>;
+        
+        var i=0;
+        for(var i=0; len=c.length;i<len; i++)
+        { 
+        if(c[i].phoneNumbers && c[i].phoneNumbers.length > 0)
+        {
+        pair += "<tr><td><center>"+
+        c[i].name.givenName+
+        "</center></td><td><center>"+
+        c[i].name.middleName+
+        "</center></td><td><center>"+
+        c[i].email[0].value + "</center></td><td>"+
+        c[i].phoneNumbers[1].value+"</td><tr>";
+        }
+        }
+        $("#myTable").html(pair);
+        }
     
-    function gotContacts(c)
-    {
-    console.log("gotContacts, numer of results "c.length);
-    
-    var pair="<tr><th data-priority=\"1\"><center>Nombre</center></th><th data-priority=\"1\"><center>Apellido</center></th><th data-priority=\"2\"><center>Email</center></th><th><center>Numero</center></th></tr>;
-    
-    var i=0;
-    for(var i=0; len=c.length;i<len; i++)
-    { 
-    if(c[i].phoneNumbers && c[i].phoneNumbers.length > 0)
-    {
-    pair += "<tr><td><center>"+
-    c[i].name.givenName+
-    "</center></td><td><center>"+
-    c[i].name.middleName+
-    "</center></td><td><center>"+
-    c[i].email[0].value + "</center></td><td>"+
-    c[i].phoneNumbers[1].value+"</td><tr>";
-    }
-    }
-    $("#myTable").html(pair);
-    }
-    function errorHandler(e)
-    {
-    console.log("errorHandler: "+e);
-    }
-    });
+        function errorHandler(e)
+        {
+        console.log("errorHandler: "+e);
+        }
     
