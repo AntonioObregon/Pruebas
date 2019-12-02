@@ -135,7 +135,9 @@ var myContact = navigator.contacts.create(
 
             myContact.save();
             alert("El contacto: "+myContact.name.givenName+" ha sido creado");
-            document.location.reload(true);
+            var allinputs = document.getElementsByTagName(‘input’);
+    allinputs.value = "";
+    
         });
 
         $(document).on('click','#getContact', function(){
