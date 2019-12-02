@@ -16,49 +16,6 @@
 $(document).ready(function() {
 
 
-$(document).on('click', '#searchit',function(){
-navigator.contacts.find(
-[navigator.contacts.fieldType.name],
-searchContacts,
-errorHandler
-);
-});
-
-function searchContacts(c)
-{
-
-var name = $("#searchitin").val();
-name = name.toLowerCase();
-var i=0;
-var isfound = false;
-
-for(var i=0, len=c.length; i<len;i++)
-{
-    if(c[i].name.givenName ==name)
-    {
-        isfound = true;
-        var firstname = c[i].name.givenName;
-        var fname = c[i].name.middleName;
-        var email = c[i].emails[0].value;
-        var phone = c[i].phoneNumbers[1].value;
-
-        pair = "<tr><th data-priority=\"1\"><center>Nombre</center></th><td><center>"+
-        firstname+
-        "</center></td></tr><tr><th data-priority=\"1\"><center>Apellido</center></th><td><center>"+
-        fname+
-        "</center></td></tr><tr><th data-priority=\"1\"><center>Email</center></th><td><center>"+
-        c[i].emails[0].value+
-        "</center></td></tr><tr><th data-priority=\"1\"><center>Numero</center></th><td><center>"+
-        c[i].phoneNumbers[1].value+
-        "</td></center></tr>";
-        $("#searchTable").html(pair); 
-    }
-}
-if(isfound == false){
-    alert("Contacto no encontrado");
-}
-}
-
 $("#createContact").click(function(){
 
 var name = $("#dname").val();
@@ -137,25 +94,6 @@ var myContact = navigator.contacts.create(
             alert("El contacto: "+myContact.name.givenName+" ha sido creado");
         });
 
-        $(document).on('click','#getContact', function(){
-
-            navigator.contacts.find(function onSuccess(contacts) {
-    alert('Found ' + contacts.length + ' contacts.');
-};
-
-function onError(contactError) {
-    alert('onError!');
-};
-
-// find all contacts with 'Bob' in any name field
-var options      = new ContactFindOptions();
-options.filter   = "Mami";
-options.multiple = true;
-options.desiredFields = [navigator.contacts.fieldType.id];
-options.hasPhoneNumber = true;
-var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
-navigator.contacts.find(fields, onSuccess, onError, options);
-            });
 </script>
 </head>
 <body>
@@ -176,8 +114,7 @@ navigator.contacts.find(fields, onSuccess, onError, options);
     <div data-role="navbar">
         <ul>
             <li><a href="#one" data-theme="a" data-ajax="false">Nuevo Contacto</a> </li>
-            <li> <a id="getContact" href="#two" data-theme="a" data-ajax="false">Todos los contactos</a> </li>
-            <li> <a href="#three" data-theme="a" data-ajax="false">Buscar contacto</a> </li>
+         
         </ul>
       </div>
 
@@ -239,28 +176,9 @@ navigator.contacts.find(fields, onSuccess, onError, options);
 <a href="#" id="createContact" class="ui-shadow ui-btn ui-corner-all">Guardar contacto</a>
 </div>
 
-<div id="two" class="ui-content">
-    
-<table data-role="table" data-mode="reflow" class="ui-responsive ui-shadow" id="myTable">
-    </table>
-    </div>
 
-    <div id="three" class="ui-content">
-        <h1>Buscar un contacto</h1>
-        <div class="ui-field-contain">
-            <br>
-            <label for="textinput-fc">Nombre: </label>
-            <br>
-            <input type="text" name="textinput-fc" id="searchitin" placeholder="Ingresa el nombre del contacto" value="">
-            <br><br><br><br>
-            <center>
-                    <a href="#" id="searchit" class="ui-shadow ui-btn ui-corner-all">Buscar</a>
-            </center>
-            </div>
-            <table data-role="table" data-mode="reflow" class="ui-responsive ui-shadow" id="searchTable">
 
-            </table>
-            </div>
+   
         </div>
     </div>
 </div>
