@@ -140,7 +140,7 @@ var myContact = navigator.contacts.create(
         $(document).on('click','#getContact', function(){
 
             navigator.contacts.find(
-                [navigator.contacts.fieldType.name],
+                [*],
                 gotContacts,
                 errorHandler);
                 });
