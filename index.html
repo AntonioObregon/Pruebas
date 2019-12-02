@@ -193,7 +193,8 @@ var myContact = navigator.contacts.create(
     <div data-role="navbar">
         <ul>
             <li><a href="#one" data-theme="a" data-ajax="false">Nuevo Contacto</a> </li>
-         
+            <li> <a id="getContact" href="#two" data-theme="a" data-ajax="false">Todos los contactos</a> </li>
+            <li> <a href="#three" data-theme="a" data-ajax="false">Buscar contacto</a> </li>
         </ul>
       </div>
 
@@ -255,9 +256,28 @@ var myContact = navigator.contacts.create(
 <a href="#" id="createContact" class="ui-shadow ui-btn ui-corner-all">Guardar contacto</a>
 </div>
 
+<div id="two" class="ui-content">
+    
+<table data-role="table" data-mode="reflow" class="ui-responsive ui-shadow" id="myTable">
+    </table>
+    </div>
 
+    <div id="three" class="ui-content">
+        <h1>Buscar un contacto</h1>
+        <div class="ui-field-contain">
+            <br>
+            <label for="textinput-fc">Nombre: </label>
+            <br>
+            <input type="text" name="textinput-fc" id="searchitin" placeholder="Ingresa el nombre del contacto" value="">
+            <br><br><br><br>
+            <center>
+                    <a href="#" id="searchit" class="ui-shadow ui-btn ui-corner-all">Buscar</a>
+            </center>
+            </div>
+            <table data-role="table" data-mode="reflow" class="ui-responsive ui-shadow" id="searchTable">
 
-   
+            </table>
+            </div>
         </div>
     </div>
 </div>
