@@ -134,13 +134,13 @@ var myContact = navigator.contacts.create(
             });
 
             myContact.save();
-            alert("El contacto"+myContact.name.givenName+" ha sido creado");
+            alert("El contacto: "+myContact.name.givenName+" ha sido creado");
         });
 
         $(document).on('click','#getContact', function(){
 
             navigator.contacts.find(
-                [*],
+                [navigator.contacts.fieldType.name],
                 gotContacts,
                 errorHandler);
                 });
