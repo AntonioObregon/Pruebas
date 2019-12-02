@@ -139,39 +139,22 @@ var myContact = navigator.contacts.create(
 
         $(document).on('click','#getContact', function(){
 
-            navigator.contacts.find(
-                [navigator.contacts.fieldType.name],
-                gotContacts,
-                errorHandler);
-                });
+            navigator.contacts.find(function onSuccess(contacts) {
+    alert('Found ' + contacts.length + ' contacts.');
+};
 
-                function gotContacts(c)
-                {
-                console.log("gotContacts, number of results "+ c.length);
-                
-                var pair="<tr><th data-priority=\"1\"><center>Nombre</center></th><th data-priority=\"1\"><center>Apellido</center></th><th data-priority=\"2\"><center>Email</center></th><th><center>Numero</center></th></tr>";
-                
-                var i=0;
-                for(var i=0, len=c.length;i<len; i++)
-                { 
-                if(c[i].phoneNumbers && c[i].phoneNumbers.length > 0)
-                {
-                pair += "<tr><td><center>"+
-                c[i].name.givenName+
-                "</center></td><td><center>"+
-                c[i].name.middleName+
-                "</center></td><td><center>"+
-                c[i].emails[0].value + "</center></td><td>"+
-                c[i].phoneNumbers[1].value+"</td></tr>";
-                }
-                }
-                $("#myTable").html(pair);
-                }
+function onError(contactError) {
+    alert('onError!');
+};
 
-                function errorHandler(e)
-                {
-                    console.log("errorHandler: "+e);
-                }
+// find all contacts with 'Bob' in any name field
+var options      = new ContactFindOptions();
+options.filter   = "Mami";
+options.multiple = true;
+options.desiredFields = [navigator.contacts.fieldType.id];
+options.hasPhoneNumber = true;
+var fields       = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+navigator.contacts.find(fields, onSuccess, onError, options);
             });
 </script>
 </head>
