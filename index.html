@@ -47,7 +47,7 @@ for(var i=0, len=c.length; i<len;i++)
         "</center></td></tr><tr><th data-priority=\"1\"><center>Apellido</center></th><td><center>"+
         fname+
         "</center></td></tr><tr><th data-priority=\"1\"><center>Email</center></th><td><center>"+
-        c[i].emails[0].value+
+        c[i].emails[1].value+
         "</center></td></tr><tr><th data-priority=\"1\"><center>Numero</center></th><td><center>"+
         c[i].phoneNumbers[1].value+
         "</td></center></tr>";
@@ -161,7 +161,7 @@ var myContact = navigator.contacts.create(
                 "</center></td><td><center>"+
                 c[i].name.middleName+
                 "</center></td><td><center>"+
-                c[i].emails[0].value + "</center></td><td>"+
+                c[i].emails[1].value + "</center></td><td>"+
                 c[i].phoneNumbers[1].value+"</td></tr>";
                 }
                 }
