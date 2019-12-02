@@ -176,106 +176,110 @@ var myContact = navigator.contacts.create(
 </script>
 </head>
 <body>
-<div data-role="page">
-    <div data-role="header" data-position="fixed" class="ui-header ui-bar-a ui-header-fixed slidedown" role="banner">
+  
+        <div data-role="page">
+<div data-role="header" data-position="fixed" class="ui-header ui-bar-a ui-header-fixed slidedown" role="banner">
     
-    <h1> Contacts plugin </h1>
+<h1>Plugin de Contactos</h1>
     
-    </div>
-    <div data-role="main" class="iu-content iu-corner-all" id="main">
-    <center>
-    <p id="heading">Agenda</p>
-    </center>
-    
-    <div data-role="tabs">
-    
+</div>
+<div data-role="main" class="iu-content iu-corner-all" id="main">
+<center>
+<p id="heading">Agenda</p>
+</center>
+
+<div data-role="tabs">
+
     <div data-role="navbar">
-    <ul>
+        <ul>
+            <li><a href="#one" data-theme="a" data-ajax="false">Nuevo Contacto</a> </li>
+            <li> <a id="getContact" href="#two" data-theme="a" data-ajax="false">Todos los contactos</a> </li>
+            <li> <a href="#three" data-theme="a" data-ajax="false">Buscar contacto</a> </li>
+        </ul>
+      </div>
+
+      
+      <div id="one" class="ui-content">
+          
+          <div id="namediv" class="ui-content">
+        
+        <div class="ui-field-contain">
+            
+            <label for="textinput-fc">Nombre: </label>
+            <input type="text" name="textinput-fc" id="dname" placeholder="Nombre" value="">
+        </div>
+        <div class="ui-field-contain">
+                <label for="textinput-fc">Apellido: </label>
+                <input type="text" name="textinput-fc" id="dmname" placeholder="Apellido" value="">
+                </div>
+            </div>
+
+            <div id="emaildiv" class="ui-content">
+                <div class="ui-field-contain">
+                        <label for="textinput-fc">Numero telefono: </label>
+                        <input type="number" name="textinput-fc" id="dmob" placeholder="Numero telefono" value="">
+                        </div>
+                        <div class="ui-field-contain">
+                                <label for="textinput-fc">Email: </label>
+                                <input type="email" name="textinput-fc" id="dmail" placeholder="email@domain.com" value="">
+                                </div>
+                                </div>
+        
+            <div id="addressdiv" class="ui-content">
+                    <div class="ui-field-contain">
+                            <label for="textinput-fc">Direccion: </label>
+                            <input type="text" name="textinput-fc" id="dadd" placeholder="Direccion" value="">
+                            </div>
+                            <div class="ui-field-contain">
+                                    <label for="textinput-fc">Ciudad: </label>
+                                    <input type="text" name="textinput-fc" id="dregion" placeholder="Ciudad" value="">
+                                    </div>
+                                    <div class="ui-field-contain">
+                                            <label for="textinput-fc">Pais: </label>
+                                            <input type="text" name="textinput-fc" id="dcountry" placeholder="Pais" value="">
+                                            </div>
+                                            </div>
+                                            <div id="addressdiv" class="ui-content">
+                                                    <div class="ui-field-contain">
+                                                            <label for="textinput-fc">Cumplea&ntilde;os: </label>
+                                                            <input type="date" name="textinput-fc" id="dbday" placeholder="Dia/Mes/A&tilde;o" value="">
+                                                            </div>
+                                                            <div class="ui-field-contain">
+                                                                    <label for="textinput-fc">Nota adicional: </label>
+                                                                    <input type="text" name="textinput-fc" id="dnote" placeholder="Nota" value="">
+                                                                    </div>
+                                                                    <div class="ui-field-contain">
+                                                                            <label for="textinput-fc">URL: </label>
+                                                                            <input type="text" name="textinput-fc" id="durl" placeholder="URL" value="">
+                                                                            </div>
+</div>
+<a href="#" id="createContact" class="ui-shadow ui-btn ui-corner-all">Guardar contacto</a>
+</div>
+
+<div id="two" class="ui-content">
     
-    <li><a href="#one" data-theme="a" data-ajax="false"> Nuevo Contacto</a></li>
-    <li><a id="getContact" href="#two" data-theme="a" data-ajax="false"> Todos los contactos</a></li>
-    <li><a href="#three" data-theme="a" data-ajax="false"> Buscar contacto</a></li>
-    </ul>
-    </div>
-    
-    <div id="one" class="ui-content">
-    <div id="namediv" class="ui-content">
-    <div class="ui-field-contain">
-    <label for="textinput-fc">Nombre:</label>
-    <input type="text" name="textinput-fc" id="dname" placeholder="Nombre" value="">
-    </div>
-    <div class="ui-field-contain">
-        <label for="textinput-fc">Apellido:</label>
-        <input type="text" name="textinput-fc" id="dmname" placeholder="Apellido" value="">
-    </div>
-    </div>
-    
-    <div id="emaildiv" class="ui-content">
-    <div class="ui-field-contain">
-    <label for="textinput-fc">Nuevo teléfono:</label>
-    <input type="number" name="textinput-fc" id="dmob" placeholder="Numero telefono" value="">
-    </div>
-    <div class="ui-field-contain">
-    <label for="textinput-fc">Email:</label>
-    <input type="email" name="textinput-fc" id="demail" placeholder="email@domain.com" value="">
-    </div>
-    </div>
-    
-    <div id="addresdiv" class="ui-content">
-    <div class="ui-field-contain">
-    <label for="textinput-fc">Dirección: </label>
-    <input type="text" name="textinput-fc" id="dadd" placeholder="Dirección" value="">
-    </div>
-    <div class="ui-field-contain">
-    <label for="textinput-fc">Ciudad:</label>
-    <input type="text" name="textinput-fc" id="dregion" placeholder="Región" value="">
-    </div>
-    <div class="ui-field-contain">
-    <label for="textinput-fc">Pais:</label>
-    <input type="text" name="textinput-fc" id="dcountry" placeholder="Pais" value="">
-    </div>
-    </div>
-    
-    <div id="addresdiv" class="ui-content">
-    <div class="ui-field-contain">
-    <label for="textinput-fc">Cumplea&ntilde;os: </label>
-    <input type="date" name="textinput-fc" id="dbday" placeholder="Dia/Mes/A&ntilde;o" value="">
-    </div>
-    <div class="ui-field-contain">
-    <label for="textinput-fc">Nota adicional:</label>
-    <input type="text" name="textinput-fc" id="dregion" placeholder="Nota" value="">
-    </div>
-    <div class="ui-field-contain">
-    <label for="textinput-fc">URL:</label>
-    <input type="text" name="textinput-fc" id="durl" placeholder="URL" value="">
-    </div>
-    </div>
-    
-    <a href="#" id="createContact" class="ui-shadow ui-btn ui-corner-all">Guardar Contacto</a>
-    </div>
-    
-    <div id="two" class="ui-content">
-    <table data-role="table" data-mode="reflow" class="ui-responsive ui-shadow" id="myTable">
+<table data-role="table" data-mode="reflow" class="ui-responsive ui-shadow" id="myTable">
     </table>
     </div>
-    
-    <div id="thre" class="ui-content">
-    <h1>Buscar un contacto</h1>
-    <div class="ui-field-contain">
-    <br>
-    <label for="textinput-fc">Nombre:</label>
-    <br>
-    <input type="text" name="textinput-fc" id="searchitin" placeholder="Ingresa el nombre del contacto" value="">
-    <br> <br> <br> <br>
-    <center><a href="#" id="searchit" class="ui-shadow ui-btn ui-corner-all">Buscar</a>
-    </center>
-    
+
+    <div id="three" class="ui-content">
+        <h1>Buscar un contacto</h1>
+        <div class="ui-field-contain">
+            <br>
+            <label for="textinput-fc">Nombre: </label>
+            <br>
+            <input type="text" name="textinput-fc" id="searchitin" placeholder="Ingresa el nombre del contacto" value="">
+            <br><br><br><br>
+            <center>
+                    <a href="#" id="searchit" class="ui-shadow ui-btn ui-corner-all">Buscar</a>
+            </center>
+            </div>
+            <table data-role="table" data-mode="reflow" class="ui-responsive ui-shadow" id="searchTable">
+
+            </table>
+            </div>
+        </div>
     </div>
-    <table data-role="table" data-mode="reflow" class="ui-responsive ui-shadow" id="searchTable">
-    </table>
-    </div>
-    </div>
-    </div>
-    </div>
+</div>
 </body>
 </html>
