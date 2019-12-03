@@ -3,283 +3,57 @@
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
-
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-<script charset="utf-8" src="index.js"></script>
-<script type="stylesheet" charset="utf-8" src="index.css"></script>
-
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
-$(document).ready(function() {
+   document.addEventListener("deviceready", onDeviceReady, false);
+   function onDeviceReady(){
 
+   }
 
-$(document).on('click', '#searchit',function(){
-navigator.contacts.find(
-[navigator.contacts.fieldType.name],
-searchContacts,
-errorHandler
-);
-});
+   function first(value){
 
-function searchContacts(c)
-{
+    switch(value){
 
-var name = $("#searchitin").val();
-name = name.toLowerCase();
-var i=0;
-var isfound = false;
+        case 1:
+            alert(cordova.file.applicationDirectory);
+            break;
 
-for(var i=0, len=c.length; i<len;i++)
-{
-    if(c[i].name.givenName ==name)
-    {
-        isfound = true;
-        var firstname = c[i].name.givenName;
-        var fname = c[i].name.middleName;
-        var email = c[i].emails[0].value;
-        var phone = c[i].phoneNumbers[1].value;
+        case 2:
+            alert(cordova.file.applicationStorageDirectory);
+            break;
 
-        pair = "<tr><th data-priority=\"1\"><center>Nombre</center></th><td><center>"+
-        firstname+
-        "</center></td></tr><tr><th data-priority=\"1\"><center>Apellido</center></th><td><center>"+
-        fname+
-        "</center></td></tr><tr><th data-priority=\"1\"><center>Email</center></th><td><center>"+
-        c[i].emails[1].value+
-        "</center></td></tr><tr><th data-priority=\"1\"><center>Numero</center></th><td><center>"+
-        c[i].phoneNumbers[1].value+
-        "</td></center></tr>";
-        $("#searchTable").html(pair); 
-    }
-}
-if(isfound == false){
-    alert("Contacto no encontrado");
-}
-}
+         case 3:
+            alert(cordova.file.cacheDirectory);
+            break;
+        
+        case 4:
+            alert(cordova.file.dataDirectory);
+            break;
+        case 5:
+            alert(cordova.file.externalRootDirectory);
+            break;
 
-$("#createContact").click(function(){
+       case 6:
+            alert(cordova.file.externalApplicationStorageDirectory);
+            break;
 
-var name = $("#dname").val();
-var mname = $("#dmname").val();
-
-var mobile = $("#dmob").val();
-var email = $("#demail").val();
-var address = $("#dadd").val();
-var region = $("#dregion").val();
-var country = $("#dcountry").val();
-var bday = $("#dbday").val();
-var note = $("#dnote").val();
-var durl = $("#durl").val();
-
-var myContact = navigator.contacts.create(
-        {
-            "displayName":null,
-            "name":
-            { 
-            "givenName":name,
-            "formatted":null,
-            "middleName":mname,
-            "familyName":null,
-            "honorificPrefix":null,
-            "honorificSufix":null
-            
-            },
-            "nickname":null,
-            "phoneNumbers":
-            [
-                {"type":"mobile","value":mobile,"id":0,"pref":false},
-                {"type":"other","value":null,"id":1,"pref":false}
-            ],
-            "emails":[
-                {"type":"home","value":email,"id":0,"pref":false}
-            ],
-            "addresses":
-                [
-                {
-                "postalCode":null,
-                "type":"work",
-                "id":0,
-                "locality":null,
-                "pref":"false",
-                "streetAddress":address,
-                "region":region,
-                "country":country
-                }
-                ],
-                "ims":null,
-                "organizations":
-                [
-                {
-                "name":"",
-                "title":"",
-                "type":null,
-                "pref":"false",
-                "department":""
-                }
-                ],
-                "birthday":bday,
-                "note":note,
-                "categories":null,
-                "urls":
-                [
-                {
-                "type":"other",
-                "value":durl,
-                "id":0,
-                "pref":false
-                }
-                ]
-            });
-
-            myContact.save();
-            alert("El contacto: "+myContact.name.givenName+" ha sido creado");
-        });
-
-        $(document).on('click','#getContact', function(){
-
-            navigator.contacts.find(
-                [navigator.contacts.fieldType.name],
-                gotContacts,
-                errorHandler);
-                });
-
-                function gotContacts(c)
-                {
-                console.log("gotContacts, number of results "+ c.length);
-                
-                var pair="<tr><th data-priority=\"1\"><center>Nombre</center></th><th data-priority=\"1\"><center>Apellido</center></th><th data-priority=\"2\"><center>Email</center></th><th><center>Numero</center></th></tr>";
-                
-                var i=0;
-                for(var i=0, len=c.length;i<len; i++)
-                { 
-                if(c[i].phoneNumbers && c[i].phoneNumbers.length > 0)
-                {
-                pair += "<tr><td><center>"+
-                c[i].name.givenName+
-                "</center></td><td><center>"+
-                c[i].name.middleName+
-                "</center></td><td><center>"+
-                c[i].emails[1].value + "</center></td><td>"+
-                c[i].phoneNumbers[1].value+"</td></tr>";
-                }
-                }
-                $("#myTable").html(pair);
-                }
-
-                function errorHandler(e)
-                {
-                    console.log("errorHandler: "+e);
-                }
-            });
+      case 7:
+            alert(cordova.file.externalDataDirectory);
+            break;
+   }
+   }
 </script>
 </head>
 <body>
-  
-        <div data-role="page">
-<div data-role="header" data-position="fixed" class="ui-header ui-bar-a ui-header-fixed slidedown" role="banner">
-    
-<h1>Plugin de Contactos</h1>
-    
-</div>
-<div data-role="main" class="iu-content iu-corner-all" id="main">
-<center>
-<p id="heading">Agenda</p>
-</center>
 
-<div data-role="tabs">
+</br></br></br></br></br></br>
+<input type="button" onclick="first(1);" value="applicationDirectory"/><br/>
+<input type="button" onclick="first(2);" value="applicatioStoragenDirectory"/><br/>
+<input type="button" onclick="first(3);" value="cacheDirectory"/><br/>
+<input type="button" onclick="first(4);" value="dataDirectory"/><br/>
+<input type="button" onclick="first(5);" value="externalRootDirectory"/><br/>
+<input type="button" onclick="first(6);" value="externalApplicationStorageDirectory"/><br/>
+<input type="button" onclick="first(7);" value="externalDataDirectory"/><br/>
 
-    <div data-role="navbar">
-        <ul>
-            <li><a href="#one" data-theme="a" data-ajax="false">Nuevo Contacto</a> </li>
-            <li> <a id="getContact" href="#two" data-theme="a" data-ajax="false">Todos los contactos</a> </li>
-            <li> <a href="#three" data-theme="a" data-ajax="false">Buscar contacto</a> </li>
-        </ul>
-      </div>
-
-      
-      <div id="one" class="ui-content">
-          
-          <div id="namediv" class="ui-content">
-        
-        <div class="ui-field-contain">
-            
-            <label for="textinput-fc">Nombre: </label>
-            <input type="text" name="textinput-fc" id="dname" placeholder="Nombre" value="">
-        </div>
-        <div class="ui-field-contain">
-                <label for="textinput-fc">Apellido: </label>
-                <input type="text" name="textinput-fc" id="dmname" placeholder="Apellido" value="">
-                </div>
-            </div>
-
-            <div id="emaildiv" class="ui-content">
-                <div class="ui-field-contain">
-                        <label for="textinput-fc">Numero telefono: </label>
-                        <input type="number" name="textinput-fc" id="dmob" placeholder="Numero telefono" value="">
-                        </div>
-                        <div class="ui-field-contain">
-                                <label for="textinput-fc">Email: </label>
-                                <input type="email" name="textinput-fc" id="dmail" placeholder="email@domain.com" value="">
-                                </div>
-                                </div>
-        
-            <div id="addressdiv" class="ui-content">
-                    <div class="ui-field-contain">
-                            <label for="textinput-fc">Direccion: </label>
-                            <input type="text" name="textinput-fc" id="dadd" placeholder="Direccion" value="">
-                            </div>
-                            <div class="ui-field-contain">
-                                    <label for="textinput-fc">Ciudad: </label>
-                                    <input type="text" name="textinput-fc" id="dregion" placeholder="Ciudad" value="">
-                                    </div>
-                                    <div class="ui-field-contain">
-                                            <label for="textinput-fc">Pais: </label>
-                                            <input type="text" name="textinput-fc" id="dcountry" placeholder="Pais" value="">
-                                            </div>
-                                            </div>
-                                            <div id="addressdiv" class="ui-content">
-                                                    <div class="ui-field-contain">
-                                                            <label for="textinput-fc">Cumplea&ntilde;os: </label>
-                                                            <input type="date" name="textinput-fc" id="dbday" placeholder="Dia/Mes/A&tilde;o" value="">
-                                                            </div>
-                                                            <div class="ui-field-contain">
-                                                                    <label for="textinput-fc">Nota adicional: </label>
-                                                                    <input type="text" name="textinput-fc" id="dnote" placeholder="Nota" value="">
-                                                                    </div>
-                                                                    <div class="ui-field-contain">
-                                                                            <label for="textinput-fc">URL: </label>
-                                                                            <input type="text" name="textinput-fc" id="durl" placeholder="URL" value="">
-                                                                            </div>
-</div>
-<a href="#" id="createContact" class="ui-shadow ui-btn ui-corner-all">Guardar contacto</a>
-</div>
-
-<div id="two" class="ui-content">
-    
-<table data-role="table" data-mode="reflow" class="ui-responsive ui-shadow" id="myTable">
-    </table>
-    </div>
-
-    <div id="three" class="ui-content">
-        <h1>Buscar un contacto</h1>
-        <div class="ui-field-contain">
-            <br>
-            <label for="textinput-fc">Nombre: </label>
-            <br>
-            <input type="text" name="textinput-fc" id="searchitin" placeholder="Ingresa el nombre del contacto" value="">
-            <br><br><br><br>
-            <center>
-                    <a href="#" id="searchit" class="ui-shadow ui-btn ui-corner-all">Buscar</a>
-            </center>
-            </div>
-            <table data-role="table" data-mode="reflow" class="ui-responsive ui-shadow" id="searchTable">
-
-            </table>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 </html>
