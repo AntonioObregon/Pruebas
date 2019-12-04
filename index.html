@@ -8,43 +8,18 @@
    document.addEventListener("deviceready", onDeviceReady, false);
    
    function onDeviceReady() {
-               window.requestFileSystem(LocalFileSystem.PERSISTENT, 1024, onFileSystemSuccess, fail);
-               window.resolveLocalFileSystemURI("file:///storage/emulated/0/example.txt", onResolveSuccess, fail);
-               var isApp = 'yes';
-               var root = this;
-               cb = window.plugins.childBrowser;
-               call();
+    window.requestFileSystem(LocalFileSystem.TEMPORARY,
+5242880, onSuccessFunction, onErrorFunction);
            }
 
-           function onFileSystemSuccess(fileSystem) {
-               console.log(fileSystem.name);
+           function onSuccessFunction(){
+           alert("Se creó");
            }
 
-           function onResolveSuccess(fileEntry) {
-               console.log(fileEntry.name);
-           }
+function onErrorFunction(){
+alert("No funcionó");
 
-           function fail(evt) {
-               console.log(evt.target.error.code);
-           }
-
-
-           function call(){
-               window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, successDirectoryReader, null);
-
-           }
-function successDirectoryReader(fileSystem)
-           {
-               try {
-                   var dirEntry = fileSystem.root;
-                   var directoryReader = dirEntry.createReader();
-                   directoryReader.readEntries(success,failure);
-               } catch (e) {
-                   alert(e);
-               }
-           }
-
- 
+}
 
    function first(value){
 
