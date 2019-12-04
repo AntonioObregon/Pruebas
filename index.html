@@ -5,74 +5,94 @@
 <meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
-   /* globals console,document,window,cordova */
-document.addEventListener('deviceready', onDeviceReady, false);
+   document.addEventListener("deviceready", onDeviceReady, false);
+   
+   function onDeviceReady() {
+               window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
+               window.resolveLocalFileSystemURI("file:///example.txt", onResolveSuccess, fail);
+               var isApp = 'yes';
+               var root = this;
+               cb = window.plugins.childBrowser;
+               call();
+           }
 
-var logOb;
+           function onFileSystemSuccess(fileSystem) {
+               console.log(fileSystem.name);
+           }
 
-function fail(e) {
-	console.log("FileSystem Error");
-	console.dir(e);
-}
+           function onResolveSuccess(fileEntry) {
+               console.log(fileEntry.name);
+           }
 
-function onDeviceReady() {
+           function fail(evt) {
+               console.log(evt.target.error.code);
+           }
 
-	window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir) {
-		console.log("got main dir",dir);
-		dir.getFile("log.txt", {create:true}, function(file) {
-			console.log("got the file", file);
-			logOb = file;
-			writeLog("App started");			
-		});
-	});
-	
-	document.querySelector("#actionOne").addEventListener("touchend", function(e) {
-		//Ok, normal stuff for actionOne here
-		//
-		//Now log it
-		writeLog("actionOne fired");
-	}, false);
 
-	document.querySelector("#actionTwo").addEventListener("touchend", function(e) {
-		//Ok, normal stuff for actionTwo here
-		//
-		//Now log it
-		writeLog("actionTwo fired");
-	}, false);
+           function call(){
+               window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, successDirectoryReader, null);
 
-}
+           }
+function successDirectoryReader(fileSystem)
+           {
+               try {
+                   var dirEntry = fileSystem.root;
+                   var directoryReader = dirEntry.createReader();
+                   directoryReader.readEntries(success,failure);
+               } catch (e) {
+                   alert(e);
+               }
+           }
 
-function writeLog(str) {
-	if(!logOb) return;
-	var log = str + " [" + (new Date()) + "]\n";
-	console.log("going to log "+log);
-	logOb.createWriter(function(fileWriter) {
-		
-		fileWriter.seek(fileWriter.length);
-		
-		var blob = new Blob([log], {type:'text/plain'});
-		fileWriter.write(blob);
-		console.log("ok, in theory i worked");
-	}, fail);
-}
+ 
 
-function justForTesting() {
-	logOb.file(function(file) {
-		var reader = new FileReader();
+   function first(value){
 
-		reader.onloadend = function(e) {
-			console.log(this.result);
-		};
+    switch(value){
 
-		reader.readAsText(file);
-	}, fail);
+        case 1:
+            alert(cordova.file.applicationDirectory);
+            break;
 
-}
+        case 2:
+            alert(cordova.file.applicationStorageDirectory);
+            break;
+
+         case 3:
+            alert(cordova.file.cacheDirectory);
+            break;
+        
+        case 4:
+            alert(cordova.file.dataDirectory);
+            break;
+        case 5:
+            alert(cordova.file.externalRootDirectory);
+            break;
+
+       case 6:
+            alert(cordova.file.externalApplicationStorageDirectory);
+            break;
+
+      case 7:
+            alert(cordova.file.externalDataDirectory);
+            break;
+   }
+   }
+
+
+   
 </script>
 </head>
 <body>
-<button id="actionOne">Action One</button>
-		<button id="actionTwo">Action Two</button>
-		
+
+</br></br></br></br></br></br>
+<input type="button" onclick="first(1);" value="applicationDirectory"/><br/>
+<input type="button" onclick="first(2);" value="applicatioStoragenDirectory"/><br/>
+<input type="button" onclick="first(3);" value="cacheDirectory"/><br/>
+<input type="button" onclick="first(4);" value="dataDirectory"/><br/>
+<input type="button" onclick="first(5);" value="externalRootDirectory"/><br/>
+<input type="button" onclick="first(6);" value="externalApplicationStorageDirectory"/><br/>
+<input type="button" onclick="first(7);" value="externalDataDirectory"/><br/>
+
 </body>
 </html>
