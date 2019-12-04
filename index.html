@@ -5,55 +5,74 @@
 <meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
-   document.addEventListener("deviceready", onDeviceReady, false);
-   function onDeviceReady(){
+   /* globals console,document,window,cordova */
+document.addEventListener('deviceready', onDeviceReady, false);
 
-   }
+var logOb;
 
-   function first(value){
+function fail(e) {
+	console.log("FileSystem Error");
+	console.dir(e);
+}
 
-    switch(value){
+function onDeviceReady() {
 
-        case 1:
-            alert(cordova.file.applicationDirectory);
-            break;
+	window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir) {
+		console.log("got main dir",dir);
+		dir.getFile("log.txt", {create:true}, function(file) {
+			console.log("got the file", file);
+			logOb = file;
+			writeLog("App started");			
+		});
+	});
+	
+	document.querySelector("#actionOne").addEventListener("touchend", function(e) {
+		//Ok, normal stuff for actionOne here
+		//
+		//Now log it
+		writeLog("actionOne fired");
+	}, false);
 
-        case 2:
-            alert(cordova.file.applicationStorageDirectory);
-            break;
+	document.querySelector("#actionTwo").addEventListener("touchend", function(e) {
+		//Ok, normal stuff for actionTwo here
+		//
+		//Now log it
+		writeLog("actionTwo fired");
+	}, false);
 
-         case 3:
-            alert(cordova.file.cacheDirectory);
-            break;
-        
-        case 4:
-            alert(cordova.file.dataDirectory);
-            break;
-        case 5:
-            alert(cordova.file.externalRootDirectory);
-            break;
+}
 
-       case 6:
-            alert(cordova.file.externalApplicationStorageDirectory);
-            break;
+function writeLog(str) {
+	if(!logOb) return;
+	var log = str + " [" + (new Date()) + "]\n";
+	console.log("going to log "+log);
+	logOb.createWriter(function(fileWriter) {
+		
+		fileWriter.seek(fileWriter.length);
+		
+		var blob = new Blob([log], {type:'text/plain'});
+		fileWriter.write(blob);
+		console.log("ok, in theory i worked");
+	}, fail);
+}
 
-      case 7:
-            alert(cordova.file.externalDataDirectory);
-            break;
-   }
-   }
+function justForTesting() {
+	logOb.file(function(file) {
+		var reader = new FileReader();
+
+		reader.onloadend = function(e) {
+			console.log(this.result);
+		};
+
+		reader.readAsText(file);
+	}, fail);
+
+}
 </script>
 </head>
 <body>
-
-</br></br></br></br></br></br>
-<input type="button" onclick="first(1);" value="applicationDirectory"/><br/>
-<input type="button" onclick="first(2);" value="applicatioStoragenDirectory"/><br/>
-<input type="button" onclick="first(3);" value="cacheDirectory"/><br/>
-<input type="button" onclick="first(4);" value="dataDirectory"/><br/>
-<input type="button" onclick="first(5);" value="externalRootDirectory"/><br/>
-<input type="button" onclick="first(6);" value="externalApplicationStorageDirectory"/><br/>
-<input type="button" onclick="first(7);" value="externalDataDirectory"/><br/>
-
+<button id="actionOne">Action One</button>
+		<button id="actionTwo">Action Two</button>
+		
 </body>
 </html>
