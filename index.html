@@ -8,7 +8,7 @@
    document.addEventListener("deviceready", onDeviceReady, false);
    
    function onDeviceReady() {
-               window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
+               window.requestFileSystem(LocalFileSystem.PERSISTENT, 1024, onFileSystemSuccess, fail);
                window.resolveLocalFileSystemURI("file:///storage/emulated/0/example.txt", onResolveSuccess, fail);
                var isApp = 'yes';
                var root = this;
