@@ -1,73 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
-<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-<script type="text/javascript" charset="utf-8">
-   document.addEventListener("deviceready", onDeviceReady, false);
-   
-   function onDeviceReady() {
-    window.requestFileSystem(LocalFileSystem.TEMPORARY,
-5242880, onSuccessFunction, onErrorFunction);
-           }
+  <head>
+    <title>FileWriter Example</title>
 
-           function onSuccessFunction(){
-           alert("Se creó");
-           }
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
 
-function onErrorFunction(){
-alert("No funcionó");
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-}
+    function onDeviceReady() {
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+    }
 
-   function first(value){
+    function gotFS(fileSystem) {
+        fileSystem.root.getFile("info.txt", {create: true, exclusive: false}, gotFileEntry, fail);
+    }
 
-    switch(value){
+    function gotFileEntry(fileEntry) {
+        fileEntry.createWriter(gotFileWriter, fail);
+    }
 
-        case 1:
-            alert(cordova.file.applicationDirectory);
-            break;
+    function gotFileWriter(writer) {
+        writer.onwriteend = function(evt) {
+            alert("contents of file now 'some sample text'");
+            writer.truncate(11);
+            writer.onwriteend = function(evt) {
+                alert("contents of file now 'some sample'");
+                writer.seek(4);
+                writer.write(" different text");
+                writer.onwriteend = function(evt){
+                    alert("contents of file now 'some different text'");
+                }
+            };
+        };
+        writer.write("some sample text"); //1
+    }
 
-        case 2:
-            alert(cordova.file.applicationStorageDirectory);
-            break;
+    function fail(error) {
+        alert(error.code);
+    }
 
-         case 3:
-            alert(cordova.file.cacheDirectory);
-            break;
-        
-        case 4:
-            alert(cordova.file.dataDirectory);
-            break;
-        case 5:
-            alert(cordova.file.externalRootDirectory);
-            break;
-
-       case 6:
-            alert(cordova.file.externalApplicationStorageDirectory);
-            break;
-
-      case 7:
-            alert(cordova.file.externalDataDirectory);
-            break;
-   }
-   }
-
-
-   
-</script>
-</head>
-<body>
-
-</br></br></br></br></br></br>
-<input type="button" onclick="first(1);" value="applicationDirectory"/><br/>
-<input type="button" onclick="first(2);" value="applicatioStoragenDirectory"/><br/>
-<input type="button" onclick="first(3);" value="cacheDirectory"/><br/>
-<input type="button" onclick="first(4);" value="dataDirectory"/><br/>
-<input type="button" onclick="first(5);" value="externalRootDirectory"/><br/>
-<input type="button" onclick="first(6);" value="externalApplicationStorageDirectory"/><br/>
-<input type="button" onclick="first(7);" value="externalDataDirectory"/><br/>
-
-</body>
+    </script>
+  </head>
+  <body>
+    <h1>Example</h1>
+    <p>Write File</p>
+  </body>
 </html>
