@@ -9,11 +9,15 @@
     document.addEventListener("deviceready", onDeviceReady, false);
 
     function onDeviceReady() {
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+       
     }
+
+    
+
 
     function gotFS(fileSystem) {
         fileSystem.root.getFile("info.txt", {create: true, exclusive: false}, gotFileEntry, fail);
+        
     }
 
     function gotFileEntry(fileEntry) {
@@ -40,10 +44,34 @@
         alert(error.code);
     }
 
+    function lectura(){
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, ler, faio);
+        
+    }
+    function ler(theFileSystem)
+    {
+        theFileSystem.root.getFile('info.tx', {create : false},onGetFileSuccess, onFileError);
+    }
+
+        function onGetFileSuccess(file) {
+        var reader = new FileReader();
+        reader.onloadend = function(e) {
+        console.log("Read end");
+        alert(e.target.result);
+        };
+        reader.onloadstart = function(e) {
+        console.log("Read start");
+        };
+        reader.onloaderror = function(e) {
+        console.log("Read error: " + e.target.error.code);
+        };
+        document.append( reader.readAsText(file));
+}
     </script>
   </head>
   <body>
     <h1>Example</h1>
     <p>Write File</p>
+    <input type="button" onclick="lectura();" value="leer">
   </body>
 </html>
