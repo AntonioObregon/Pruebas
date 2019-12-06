@@ -89,11 +89,24 @@ function copias() {
 	var directorio = "file:///storage/emulated/0";
 	var nuevodir ="file:///storage/emulated/0/filecordova";
 var nombreArchivo = "archivoPhonegap.txt";
-window.resolveLocalFileSystemURI("file:///storage/emulated/0/archivoPhonegap.txt", function(file) {
-   window.resolveLocalFileSystemURI(nuevodir, function(destination) {
-             file.moveTo(destination,"example.txt");
-   },fail)
-},fail);
+
+window.resolveLocalFileSystemURL(directorio, function(dir) {
+	dir.getFile(nombreArchivo, {create:false}, function(fileEntry) {
+		
+		fileEntry.copyTo(nuevodir, 'archivoPhonegap2.txt',function(){
+                alert('Successful Copy!');
+            },
+            function()
+            {
+                alert('Copying Unsuccessful ');
+            });
+		
+	});
+	});
+
+
+
+
 
 
 }
@@ -104,10 +117,11 @@ window.resolveLocalFileSystemURI("file:///storage/emulated/0/archivoPhonegap.txt
 </script>
 </head>
 <body>
-	<input type="button" onclick="escribir();" value="Escribir"/><br/>
-	<input type="button" onclick="leer();" value="Leer"/><br/>
-	<input type="button" onclick="metas();" value="Metadata"/><br/>
-	<input type="button" onclick="copias();" value="Copiar"/><br/>
+		<br/><br/>	<br/><br/>
+	<input type="button" onclick="escribir();" value="Escribir"/><br/><br/>
+	<input type="button" onclick="leer();" value="Leer"/><br/><br/>
+	<input type="button" onclick="metas();" value="Metadata"/><br/><br/>
+	<input type="button" onclick="copias();" value="Copiar"/><br/><br/>
 
 	<textarea id="textArea" style="width: 100%;" rows="4"></textarea>
 	
