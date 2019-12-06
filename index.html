@@ -9,7 +9,12 @@
    document.addEventListener("deviceready", onDeviceReady, false);
    
    function onDeviceReady() {
-var directorio = "file:///storage/emulated/0";
+
+
+           }
+
+function escribir(){
+	var directorio = "file:///storage/emulated/0";
 var nombreArchivo = "archivoPhonegap.txt";
 
 window.resolveLocalFileSystemURL(directorio, function(dir) {
@@ -20,16 +25,7 @@ window.resolveLocalFileSystemURL(directorio, function(dir) {
 });
 
 function gotFileWriter(writer) {
-        writer.onwriteend = function(evt) {
-            writer.truncate(11);
-            writer.onwriteend = function(evt) {
-                writer.seek(4);
-                writer.write(" Escritura en PhoneGap");
-                writer.onwriteend = function(evt){
-                    
-                }
-            };
-        };
+        
         writer.write("some sample text"); //1
 	}
 	
@@ -37,11 +33,11 @@ function gotFileWriter(writer) {
         alert(error.code);
     }
 
-           }
+}
 
 </script>
 </head>
 <body>
-
+	<input type="button" onclick="escribir();" value="Escribir"/><br/>
 </body>
 </html>
