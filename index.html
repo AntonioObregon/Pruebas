@@ -74,7 +74,32 @@ window.resolveLocalFileSystemURL(directorio, function(dir) {
 		
 		fileEntry.getMetadata(function(metadata) {
 		
-			alert("File Modification Time:" + metadata.modificationTime);
+			alert("Hora de modificación: " + metadata.modificationTime);
+		
+	});
+	});
+});
+
+
+}
+
+function copias() {
+	
+
+	var directorio = "file:///storage/emulated/0";
+	var nuevodir ="file:///storage/emulated/0/filecordova";
+var nombreArchivo = "archivoPhonegap.txt";
+
+window.resolveLocalFileSystemURL(directorio, function(dir) {
+	dir.getFile(nombreArchivo, {create:true}, function(fileEntry) {
+		
+		fileEntry.moveTo(nuevodir, 'new_fileName.txt',function(){
+                alert('Successful Copy!');
+            },
+            function()
+            {
+                alert('Copying Unsuccessful ');
+            });
 		
 	});
 	});
@@ -92,8 +117,9 @@ window.resolveLocalFileSystemURL(directorio, function(dir) {
 	<input type="button" onclick="escribir();" value="Escribir"/><br/>
 	<input type="button" onclick="leer();" value="Leer"/><br/>
 	<input type="button" onclick="metas();" value="Metadata"/><br/>
+	<input type="button" onclick="copias();" value="Copiar"/><br/>
 
-	<textarea id="textArea"></textarea>
-	<textarea id="metadatos"></textarea>
+	<textarea id="textArea" style="width: 100%;" rows="4"></textarea>
+	
 </body>
 </html>
