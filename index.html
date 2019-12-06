@@ -1,72 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>FileWriter Example</title>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+<script type="text/javascript" charset="utf-8">
 
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-    <script type="text/javascript" charset="utf-8">
+   document.addEventListener("deviceready", onDeviceReady, false);
+   
+   function onDeviceReady() {
+var directorio = "file:///storage/emulated/0";
+var nombreArchivo = "archivoPhonegap.txt";
 
-    document.addEventListener("deviceready", onDeviceReady, false);
+window.resolveLocalFileSystemURL(directorio, function(dir) {
+	dir.getFile(nombreArchivo, {create:true}, function(fileEntry) {
+		// el archivo ha sido creado satisfactoriamente.
+		// Usa fileEntry para leer el contenido o borrar el archivo
+	});
+});
+           }
 
-    function onDeviceReady() {
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-    }
+</script>
+</head>
+<body>
 
-    function gotFS(fileSystem) {
-        fileSystem.root.getFile("info.txt", {create: true, exclusive: false}, gotFileEntry, fail);
-        
-    }
-
-    function gotFileEntry(fileEntry) {
-        fileEntry.createWriter(gotFileWriter, fail);
-    }
-
-    function gotFileWriter(writer) {
-        writer.onwriteend = function(evt) {
-            alert("contents of file now 'some sample text'");
-            writer.truncate(11);
-            writer.onwriteend = function(evt) {
-                alert("contents of file now 'some sample'");
-                writer.seek(4);
-                writer.write(" different text");
-                writer.onwriteend = function(evt){
-                    alert("contents of file now 'some different text'");
-                }
-            };
-        };
-        writer.write("some sample text"); //1
-    }
-
-    function fail(error) {
-        alert(error.code);
-    }
-
-    function lectura(theFileSystem)
-    {
-        theFileSystem.root.getFile('info.txt', {create : false}, onGetFileSuccess, onFileError);
-    }
-
-            function onGetFileSuccess(file) {
-        var reader = new FileReader();
-        reader.onloadend = function(e) {
-        console.log("Read end");
-        alert(e.target.result);
-        };
-        reader.onloadstart = function(e) {
-        console.log("Read start");
-        };
-                reader.onloaderror = function(e) {
-        console.log("Read error: " + e.target.error.code);
-        };
-        alert(reader.readAsText(file));
-        }
-
-
-    </script>
-  </head>
-  <body>
-    <h1>Example</h1>
-    <p>Write File</p>
-    <input type="button" onclick="lectura(LocalFileSystem.PERSISTENT);" value="Leer">
-  </body>
+</body>
 </html>
