@@ -93,7 +93,7 @@ var nombreArchivo = "archivoPhonegap.txt";
 window.resolveLocalFileSystemURL(directorio, function(dir) {
 	dir.getFile(nombreArchivo, {create:true}, function(fileEntry) {
 		
-		fileEntry.moveTo(nuevodir, 'new_fileName.txt',function(){
+		fileEntry.copyTo(directorio, 'archivoPhonegap2.txt',function(){
                 alert('Successful Copy!');
             },
             function()
