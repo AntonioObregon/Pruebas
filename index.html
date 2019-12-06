@@ -18,7 +18,8 @@ var nombreArchivo = "archivoPhonegap.txt";
            }
 
 function escribir(){
-	
+	var directorio = "file:///storage/emulated/0";
+var nombreArchivo = "archivoPhonegap.txt";
 
 window.resolveLocalFileSystemURL(directorio, function(dir) {
 	dir.getFile(nombreArchivo, {create:true}, function(fileEntry) {
@@ -40,30 +41,31 @@ function gotFileWriter(writer) {
 function leer() {
 	
 
-	window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + directorio, gotFile, fail);
+	var directorio = "file:///storage/emulated/0";
+var nombreArchivo = "archivoPhonegap.txt";
 
-
-}
-
-function fail(e) {
-	console.log("FileSystem Error");
-	console.dir(e);
-}
-
-function gotFile(fileEntry) {
-
-	fileEntry.file(function(file) {
+window.resolveLocalFileSystemURL(directorio, function(dir) {
+	dir.getFile(nombreArchivo, {create:true}, function(fileEntry) {
+		
+		fileEntry.file(function(file) {
 		var reader = new FileReader();
 
 		reader.onloadend = function(e) {
-			console.log("Text is: "+this.result);
+			
 			document.querySelector("#textArea").innerHTML = this.result;
 		}
 
 		reader.readAsText(file);
 	});
+	});
+});
+
 
 }
+
+
+
+
 </script>
 </head>
 <body>
