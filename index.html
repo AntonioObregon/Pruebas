@@ -63,6 +63,26 @@ window.resolveLocalFileSystemURL(directorio, function(dir) {
 
 }
 
+function metas() {
+	
+
+	var directorio = "file:///storage/emulated/0";
+var nombreArchivo = "archivoPhonegap.txt";
+
+window.resolveLocalFileSystemURL(directorio, function(dir) {
+	dir.getFile(nombreArchivo, {create:true}, function(fileEntry) {
+		
+		fileEntry.getMetadata(function(metadata) {
+		
+			alert("File Modification Time:" + metadata.modificationTime);
+		
+	});
+	});
+});
+
+
+}
+
 
 
 
@@ -71,7 +91,9 @@ window.resolveLocalFileSystemURL(directorio, function(dir) {
 <body>
 	<input type="button" onclick="escribir();" value="Escribir"/><br/>
 	<input type="button" onclick="leer();" value="Leer"/><br/>
+	<input type="button" onclick="leer();" value="Metadata"/><br/>
 
 	<textarea id="textArea"></textarea>
+	<textarea id="metadatos"></textarea>
 </body>
 </html>
