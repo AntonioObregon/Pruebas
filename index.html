@@ -6,6 +6,10 @@
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8">
 
+
+var directorio = "file:///storage/emulated/0";
+var nombreArchivo = "archivoPhonegap.txt";
+
    document.addEventListener("deviceready", onDeviceReady, false);
    
    function onDeviceReady() {
@@ -14,8 +18,7 @@
            }
 
 function escribir(){
-	var directorio = "file:///storage/emulated/0";
-var nombreArchivo = "archivoPhonegap.txt";
+	
 
 window.resolveLocalFileSystemURL(directorio, function(dir) {
 	dir.getFile(nombreArchivo, {create:true}, function(fileEntry) {
@@ -34,16 +37,11 @@ function gotFileWriter(writer) {
 
 }
 
-function init() {
+function leer() {
 	
-	//This alias is a read-only pointer to the app itself
-	window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + "www/index.html", gotFile, fail);
 
-	/* Yes, this works too for our specific example...
-	$.get("index.html", function(res) {
-		console.log("index.html", res);
-	});
-	*/
+	window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + directorio, gotFile, fail);
+
 
 }
 
@@ -70,7 +68,7 @@ function gotFile(fileEntry) {
 </head>
 <body>
 	<input type="button" onclick="escribir();" value="Escribir"/><br/>
-	<input type="button" onclick="init();" value="Leer"/><br/>
+	<input type="button" onclick="leer();" value="Leer"/><br/>
 
 	<textarea id="textArea"></textarea>
 </body>
