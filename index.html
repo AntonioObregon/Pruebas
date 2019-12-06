@@ -34,14 +34,14 @@ function gotFileWriter(writer) {
 
 }
 
-function leer(file){
+function leer(directorio,nombreArchivo){
 
 	
 		var reader = new FileReader();
 
 		reader.onloadend = function(e) {console.log(this.result);};
 
-		alert(reader.readAsText(file));
+		alert(reader.readAsText(nombreArchivo));
 	
 
 }
@@ -50,6 +50,6 @@ function leer(file){
 </head>
 <body>
 	<input type="button" onclick="escribir();" value="Escribir"/><br/>
-	<input type="button" onclick="leer("file:///storage/emulated/0/archivoPhonegap.txt");" value="leer"/><br/>
+	<input type="button" onclick="leer(directorio, nombreArchivo);" value="Leer"/><br/>
 </body>
 </html>
