@@ -61,7 +61,7 @@ $("#showTable").click(function(){
        var len = results.rows.length, i;
        $("#rowCount").html(len);
        for (i = 0; i < len; i++){
-          $("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td><td><a href='edit.html?id="+results.rows.item(i).id+"&title="+results.rows.item(i).title+"&desc="+results.rows.item(i).desc+"'>Edit</a> &nbsp;&nbsp; <a class='delete' href='#' id='"+results.rows.item(i).id+"'>Delete</a></td></tr>");
+          $("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td> <a class='delete' href='#' id='"+results.rows.item(i).id+"'>Delete</a></td></tr>");
        }
     }, null);
   });
@@ -127,7 +127,7 @@ body{background-color: #c54245; }
 
 #showTable	{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%;}
 
-table{background-color: #146b3a;font-weight: bold; font-size: 80%; color: white;}
+table{background-color: #146b3a;font-weight: bold; font-size: 90%; color: white; width: fit-content;}
 
 #DropTable{background-color: #f8b229;font-weight: bold; font-size: 150%; color: white; width: 100%;}
 
@@ -145,14 +145,16 @@ img{
 </head>
 <body>
 	<center>
-<h1>Hermanos y regalos</h1>
+<h1 style="color: white;">Hermanos y regalos</h1>
 	</center>
 
 		<button id="createTable" >Crear Tabla</button>
-		<label for="title" style="color: white;">Hermano</label>
-			<input type="text" id="title" placeholder="Nombre Hermano" style="width: 100%;">
-			<label for="desc" style="color: white;">¿Que le regalaré?</label>	
-			<input type="text" id="desc" placeholder="Regalo" style="width: 100%;">
+		<p></p>
+		<label for="title" style="color: white; font-size: 110%;">Hermano</label>
+			<input type="text" id="title" placeholder="Nombre Hermano" style="width: 90%;">
+			<p></p>
+			<label for="desc" style="color: white; font-size: 110%;">¿Que le regalaré?</label>	
+			<input type="text" id="desc" placeholder="Regalo" style="width: 90%;">
 		  
 			<br/>
 		  <button id="insert" >Insertar renglón</button>
