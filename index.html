@@ -1,45 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>SQLite Example</title>
-    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+<link rel="stylesheet" href="estiloph.css">
+
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+
+$(document).ready(function(){
+
+var myDB;
+//Open Database Connection
+document.addEventListener("deviceready",onDeviceReady,false);
+function onDeviceReady(){
+myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
+}
+//Create new table
+$("#createTable").click(function(){
+    myDB.transaction(function(transaction) {
+    transaction.executeSql('CREATE TABLE IF NOT EXISTS phonegap_pro (id integer primary key, title text, desc text)', [],
+        function(tx, result) {
+            alert("Table created successfully");
+        }, 
+        function(error) {
+              alert("Error occurred while creating the table.");
+        });
+    });
+});
+
+//Insert New Data
+$("#insert").click(function(){
+  var title=$("#title").val();
+  var desc=$("#desc").val();
+  console.log(title +""+ desc);
+  myDB.transaction(function(transaction) {
+        var executeQuery = "INSERT INTO phonegap_pro (title, desc) VALUES (?,?)";             
+        transaction.executeSql(executeQuery, [title,desc]
+            , function(tx, result) {
+                 alert('Inserted');
+            },
+            function(error){
+                 alert('Error occurred'); 
+            });
+    });
+});
+
+//Display Table Data
+$("#showTable").click(function(){
+  $("#TableData").html("");
+  myDB.transaction(function(transaction) {
+  transaction.executeSql('SELECT * FROM phonegap_pro', [], function (tx, results) {
+       var len = results.rows.length, i;
+       $("#rowCount").html(len);
+       for (i = 0; i < len; i++){
+          $("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td><td><a href='edit.html?id="+results.rows.item(i).id+"&title="+results.rows.item(i).title+"&desc="+results.rows.item(i).desc+"'>Edit</a> &nbsp;&nbsp; <a class='delete' href='#' id='"+results.rows.item(i).id+"'>Delete</a></td></tr>");
+       }
+    }, null);
+  });
+});
+
+//Delete Data from Database
+$(document.body).on('click', '.delete' ,function(){
+  var id=this.id;
+  myDB.transaction(function(transaction) {
+    var executeQuery = "DELETE FROM phonegap_pro where id=?";
+    transaction.executeSql(executeQuery, [id],
+      //On Success
+      function(tx, result) {alert('Delete successfully');},
+      //On Error
+      function(error){alert('Something went Wrong');});
+  });
+});
+
+
+//Delete Tables
+$("#update").click(function(){
+  var id=$("#id").text();
+  var title=$("#title").val();
+  var desc=$("#desc").val()
+  myDB.transaction(function(transaction) {
+    var executeQuery = "UPDATE phonegap_pro SET title=?, desc=? WHERE id=?";
+    transaction.executeSql(executeQuery, [title,desc,id],
+      //On Success
+      function(tx, result) {alert('Updated successfully');},
+      //On Error
+      function(error){alert('Something went Wrong');});
+  });
+});
+
+$("#DropTable").click(function(){
+    myDB.transaction(function(transaction) {
+        var executeQuery = "DROP TABLE  IF EXISTS phonegap_pro";
+        transaction.executeSql(executeQuery, [],
+            function(tx, result) {alert('Table deleted successfully.');},
+            function(error){alert('Error occurred while droping the table.');}
+        );
+    });
+});
+
+});
+
+
+
+
+</script>
+
+<style>
+*{
+	color: white;
+	width: 100%;
+	font-family: Verdana;
+}
+
+body{background-color: #c54245; }
+
+#createTable{background-color: #146b3a; font-weight: bold;}
+
+#insert{background-color: #146b3a; font-weight: bold;}
+
+#showTable	{background-color: #146b3a; font-weight: bold;}
+
+table > thead{background-color: #146b3a;font-weight: bold;}
+
+#DropTable{background-color: #f8b229;font-weight: bold;}
+
+img{
+    width: 10%;
+    height: auto;
+    display: block;
+  	margin-left: auto;
+  	margin-right: auto;
+}
+
+
+</style>
+
 </head>
 <body>
-    <div class="bar bar-header bar-dark">
-        <h1 class="title">Phonegap SQLite Example</h1>
-    </div>
-    <div style="padding:10px;margin-top:60px;">
-    <button id="createTable" class="button button-block">1. Create Table</button>
-    <div class="list">
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Title</span>
-        <input type="text" id="title" placeholder="your title">
-      </label>
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Description</span>
-        <input type="text" id="desc" placeholder="Description">
-      </label>
-      <button id="insert" class="button button-block">2. INSERT</button>
-    </div>
-    <p id="status"></p>
-    <button id="showTable" class="button button-block">3. Show Table</button>
-    No of Rows: <p id="rowCount"></p>
-    <table class="table">
-        <thead>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Desc</th>
-            <th>Action</th>
-        </thead>
-        <tbody id="TableData">
-            
-        </tbody>
-    </table>
-    <button id="DropTable" class="button button-block">Drop Table</button>
-    </div>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-</body>
+	<center>
+<h1>Hermanos y regalos</h1>
+	</center>
+
+		<button id="createTable" >Crear Tabla</button>
+		<p>Hermano</p>
+			<input type="text" id="title" placeholder="Nombre Hermano">
+			<p>¿Que le regalaré?</p>	
+			<input type="text" id="desc" placeholder="Regalo">
+		  
+			<br/><br/>
+		  <button id="insert" >Insertar renglón</button>
+		
+		<p id="status"></p>
+		<button id="showTable">Mostrar Tabla</button>
+		
+		<table class="table">
+			<thead>
+				<th>ID</th>
+				<th>Title</th>
+				<th>Desc</th>
+				<th>Action</th>
+			</thead>
+			<tbody id="TableData">
+				
+			</tbody>
+		</table>
+		<button id="DropTable" >Eliminar la tabla</button>
+		<img src="gift-flat.png">   
+
+	</body>
 </html>
