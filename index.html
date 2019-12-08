@@ -53,11 +53,11 @@ $("#showTable").click(function(){
        var len = results.rows.length, i;
        $("#rowCount").html(len);
        for (i = 0; i < len; i++){
-				$("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td><td>  <div class="links"> <a href='edit.html?id="+results.rows.item(i).id+"&title="+results.rows.item(i).title+"&desc="+results.rows.item(i).desc+"'>Edit</a></div> &nbsp;&nbsp;  <div class="links"><a class='delete' href='#' id='"+results.rows.item(i).id+"'>Delete</a> </div></td></tr>");
-       }
-    }, null);
-  });
+	}
+}, null);
 });
+});
+$("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td><td> <div><a href='edit.html?id="+results.rows.item(i).id+"&title="+results.rows.item(i).title+"&desc="+results.rows.item(i).desc+"'>Edit</a></div> &nbsp;&nbsp;  <div><a class='delete' href='#' id='"+results.rows.item(i).id+"'>Delete</a> </div></td></tr>");
 
 //Delete Data from Database
 $(document.body).on('click', '.delete' ,function(){
@@ -131,8 +131,8 @@ img{
   	margin-right: auto;
 }
 
-.links{
 
+table >div {
 width: 100%;  
 height: auto;
 background-color: #2e3c7c;
