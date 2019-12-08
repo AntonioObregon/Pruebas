@@ -53,7 +53,7 @@ $("#showTable").click(function(){
        var len = results.rows.length, i;
        $("#rowCount").html(len);
        for (i = 0; i < len; i++){
-          $("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td> <td><a href='edit.html?id="+results.rows.item(i).id+"&title="+results.rows.item(i).title+"&desc="+results.rows.item(i).desc+"'>Edit</a> &nbsp;&nbsp; <a class='delete' href='#' id='"+results.rows.item(i).id+"'>Delete</a></td></tr>");
+				$("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td><td><a href='edit.html?id="+results.rows.item(i).id+"&title="+results.rows.item(i).title+"&desc="+results.rows.item(i).desc+"'>Edit</a> &nbsp;&nbsp; <a class='delete' href='#' id='"+results.rows.item(i).id+"'>Delete</a></td></tr>");
        }
     }, null);
   });
@@ -113,15 +113,15 @@ $("#DropTable").click(function(){
 
 body{background-color: #c54245; }
 
-#createTable{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%;}
+#createTable{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%; border:none;}
 
-#insert{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%;}
+#insert{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%; border:none;}
 
-#showTable	{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%;}
+#showTable	{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%; border:none;}
 
 table{background-color: #146b3a;font-weight: bold; font-size: 90%; color: white; width: 100%;}
 
-#DropTable{background-image: url(botoneliminar.png); font-weight: bold; font-size: 150%; color: #2e3c7c; width: 100%;}
+#DropTable{background-image: url(botoneliminar.png); font-weight: bold; font-size: 150%; color: #2e3c7c; width: 100%; border:none;}
 
 img{
     width: 50%;
