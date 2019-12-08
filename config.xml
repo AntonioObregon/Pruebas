@@ -16,8 +16,9 @@
   <plugin name="cordova-plugin-camera"/>
   <plugin name="cordova-plugin-contacts"/>
   <plugin name="cordova-plugin-file"/>
-   <plugin name="cordova-sqlite-storage"/>
-<access origin="*" />
+  <plugin spec="https://https://github.com/xpbrew/cordova-sqlite-storage" source="git" />
+
+  <access origin="*" />
   <allow-intent href="http://*/*" />
   <allow-intent href="https://*/*" />
   <allow-intent href="tel:*" />
