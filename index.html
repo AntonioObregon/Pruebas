@@ -4,6 +4,13 @@
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
 
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+
+
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 
 <script type="text/javascript" charset="utf-8">
@@ -54,7 +61,7 @@ $("#showTable").click(function(){
        var len = results.rows.length, i;
        $("#rowCount").html(len);
        for (i = 0; i < len; i++){
-          $("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td> <a class='delete' href='#' id='"+results.rows.item(i).id+"'>Delete</a></td></tr>");
+          $("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td> <td><a href='edit.html?id="+results.rows.item(i).id+"&title="+results.rows.item(i).title+"&desc="+results.rows.item(i).desc+"'>Edit</a> &nbsp;&nbsp; <a class='delete' href='#' id='"+results.rows.item(i).id+"'>Delete</a></td></tr>");
        }
     }, null);
   });
@@ -144,12 +151,12 @@ img{
 		<button id="createTable" >Crear Tabla</button>
 		<p></p>
 		<label for="title" style="color: white; font-size: 120%;">Hermano</label>
-			<input type="text" id="title" placeholder="Nombre Hermano" style="width: 98%; font-size: 120%;">
+			<input type="text" id="title" placeholder="Nombre Hermano" style="width: 96%; font-size: 120%;">
 			<p></p>
 			<label for="desc" style="color: white; font-size: 120%;">¿Que le regalaré?</label>	
-			<input type="text" id="desc" placeholder="Regalo" style="width: 98%; font-size: 120%;">
+			<input type="text" id="desc" placeholder="Regalo" style="width: 96%; font-size: 120%;">
 		  
-			<br/>
+			<p></p>
 		  <button id="insert" >Insertar renglón</button>
 		
 		
