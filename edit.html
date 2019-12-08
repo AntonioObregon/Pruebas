@@ -144,6 +144,16 @@ img{
 
 #update{background-image: url(botoneliminar.png); font-weight: bold; font-size: 200%; color: #993a3a; width: 100%;}
 
+.regresar{
+
+width: 100%;  
+height: auto;
+background-color: #993a3a;
+padding: 1% 0%;
+
+}
+
+.regresar > a{ margin-left:50%; text-decoration: none; color: azure; font-weight: bold; }
 </style>
 
 </head>
@@ -152,11 +162,12 @@ img{
 <h1 style="color: white;">Hermanos y regalos</h1>
 	</center>
 
-  
-      <a href="index.html">Regresar</a>
+  <div class="regresar">
+        <a href="index.html">Regresar</a>
+  </div>
       <h2 style="color: white;">Actualizar tabla</h2>
  
-      ID: <span id="id"></span>
+      <p style="color: white; font-size: 120%;">ID:</p> <span id="id" style="color: white; font-size: 120%;"></span>
     <p></p>
       <label for="title" style="color: white; font-size: 120%;">Hermano</label>     
       <input type="text" id="title" placeholder="Nombre Hermano" value="" style="width: 96%; font-size: 120%;">
