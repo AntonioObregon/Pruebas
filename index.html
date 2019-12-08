@@ -127,12 +127,12 @@ body{background-color: #c54245; }
 
 #showTable	{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%;}
 
-table{background-color: #146b3a;font-weight: bold; font-size: 150%; color: white; width: 100%;}
+table{background-color: #146b3a;font-weight: bold; font-size: 150%; color: white;}
 
 #DropTable{background-color: #f8b229;font-weight: bold; font-size: 150%; color: white; width: 100%;}
 
 img{
-    width: 10%;
+    width: 50%;
     height: auto;
     display: block;
   	margin-left: auto;
@@ -150,16 +150,16 @@ img{
 
 		<button id="createTable" >Crear Tabla</button>
 		<p style="color: white;">Hermano</p>
-			<input type="text" id="title" placeholder="Nombre Hermano">
+			<input type="text" id="title" placeholder="Nombre Hermano" style="width: 100%;">
 			<p style="color: white;">¿Que le regalaré?</p>	
-			<input type="text" id="desc" placeholder="Regalo">
+			<input type="text" id="desc" placeholder="Regalo" style="width: 100%;">
 		  
 			<br/>
 		  <button id="insert" >Insertar renglón</button>
 		
-		<p id="status"></p>
-		<button id="showTable">Mostrar Tabla</button>
 		
+		<button id="showTable">Mostrar Tabla</button>
+		<br/>
 		<table class="table">
 			<thead>
 				<th>ID</th>
@@ -173,6 +173,7 @@ img{
 		</table>
 		<p></p>
 		<button id="DropTable" >Eliminar la tabla</button>
+		<p></p>
 		<img src="gift-flat.png">   
 
 	</body>
