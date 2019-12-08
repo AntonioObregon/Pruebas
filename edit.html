@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>SQLite Example</title>
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" charset="utf-8">
 
 function getUrlVars() {
     var vars = [], hash;
@@ -124,28 +122,53 @@ $("#DropTable").click(function(){
 
 });
 
-        
-    </script>
+
+</script>
+
+<style>
+*{
+	font-family: Verdana;
+	padding: 0% 1%;
+}
+
+body{background-color: #146b3a; }
+
+
+img{
+    width: 50%;
+    height: auto;
+    display: block;
+  	margin-left: auto;
+  	margin-right: auto;
+}
+
+#update{background-image: url(botoneliminar.png); font-weight: bold; font-size: 200%; color: #993a3a; width: 100%;}
+
+</style>
+
 </head>
 <body>
-    <div class="bar bar-header bar-dark">
-        <a class="button button-clear" href="index.html">Home</a>
-        <h1 class="title">Edit Table</h1>
-    </div>
-    <div style="padding:10px;margin-top:60px;">
-    <div class="list">
-        ID: <span id="id"></span>
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Title</span>
-        <input type="text" id="title" placeholder="your title" value="">
-      </label>
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Description</span>
-        <input type="text" id="desc" placeholder="Description">
-      </label>
-      <button id="update" class="button button-block">UPDATE</button>
-    </div>    
-    </div>
+	<center>
+<h1 style="color: white;">Hermanos y regalos</h1>
+	</center>
 
-</body>
+  
+      <a href="index.html">Regresar</a>
+      <h2 style="color: white;">Actualizar tabla</h2>
+ 
+      ID: <span id="id"></span>
+    <p></p>
+      <label for="title" style="color: white; font-size: 120%;">Hermano</label>     
+      <input type="text" id="title" placeholder="Nombre Hermano" value="" style="width: 96%; font-size: 120%;">
+      <p></p>
+      <label for="desc" style="color: white; font-size: 120%;">¿Que le regalaré?</label>	
+      <input type="text" id="desc" placeholder="Regalo" style="width: 96%; font-size: 120%;">
+      <p></p>
+    <button id="update" class="button button-block">Actualizar</button>
+
+
+		<p></p>
+		<img src="gift-flat.png">   
+
+	</body>
 </html>
