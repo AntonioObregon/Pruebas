@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="phonegap-version" value="cli-7.1.0" />
-  <name>pruebaFile</name>
+  <name>pruebaBD</name>
   <description>
       Esta es una aplicacion para utilizar el plugin file
   </description>
@@ -16,6 +16,12 @@
   <plugin name="cordova-plugin-camera"/>
   <plugin name="cordova-plugin-contacts"/>
   <plugin name="cordova-plugin-file"/>
+   <plugin name="cordova-sqlite-storage/>
+
+    <gap:plugin name="SQLitePlugin" value="io.liteglue.SQLitePlugin"/>
+    <gap:plugin name="SQLitePlugin" value="SQLitePlugin" />
+    <gap:plugin name="SQLitePlugin" value="org.sqliteexample.sample.sqlitePlugin.SQLitePlugin"/>
+
   <access origin="*" />
   <allow-intent href="http://*/*" />
   <allow-intent href="https://*/*" />
