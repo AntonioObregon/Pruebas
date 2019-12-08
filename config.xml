@@ -17,12 +17,7 @@
   <plugin name="cordova-plugin-contacts"/>
   <plugin name="cordova-plugin-file"/>
    <plugin name="cordova-sqlite-storage"/>
-
-    
-    <gap:plugin name="SQLitePlugin" value="SQLitePlugin" />
-    
-
-  <access origin="*" />
+<access origin="*" />
   <allow-intent href="http://*/*" />
   <allow-intent href="https://*/*" />
   <allow-intent href="tel:*" />
