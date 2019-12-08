@@ -18,9 +18,9 @@
   <plugin name="cordova-plugin-file"/>
    <plugin name="cordova-sqlite-storage"/>
 
-    <gap:plugin name="SQLitePlugin" value="io.liteglue.SQLitePlugin"/>
+    
     <gap:plugin name="SQLitePlugin" value="SQLitePlugin" />
-    <gap:plugin name="SQLitePlugin" value="org.sqliteexample.sample.sqlitePlugin.SQLitePlugin"/>
+    
 
   <access origin="*" />
   <allow-intent href="http://*/*" />
