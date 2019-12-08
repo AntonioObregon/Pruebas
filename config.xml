@@ -16,7 +16,7 @@
   <plugin name="cordova-plugin-camera"/>
   <plugin name="cordova-plugin-contacts"/>
   <plugin name="cordova-plugin-file"/>
-  <plugin name="cordova-sqlite-storage"/>
+
 
   <access origin="*" />
   <allow-intent href="http://*/*" />
