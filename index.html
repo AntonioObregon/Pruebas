@@ -115,22 +115,21 @@ $("#DropTable").click(function(){
 
 <style>
 *{
-	color: white;
-	width: 100%;
 	font-family: Verdana;
+	padding: 0% 1%;
 }
 
 body{background-color: #c54245; }
 
-#createTable{background-color: #146b3a; font-weight: bold;}
+#createTable{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%;}
 
-#insert{background-color: #146b3a; font-weight: bold;}
+#insert{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%;}
 
-#showTable	{background-color: #146b3a; font-weight: bold;}
+#showTable	{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%;}
 
-table > thead{background-color: #146b3a;font-weight: bold;}
+table{background-color: #146b3a;font-weight: bold; font-size: 150%; color: white; width: 100%;}
 
-#DropTable{background-color: #f8b229;font-weight: bold;}
+#DropTable{background-color: #f8b229;font-weight: bold; font-size: 150%; color: white; width: 100%;}
 
 img{
     width: 10%;
@@ -150,12 +149,12 @@ img{
 	</center>
 
 		<button id="createTable" >Crear Tabla</button>
-		<p>Hermano</p>
+		<p style="color: white;">Hermano</p>
 			<input type="text" id="title" placeholder="Nombre Hermano">
-			<p>¿Que le regalaré?</p>	
+			<p style="color: white;">¿Que le regalaré?</p>	
 			<input type="text" id="desc" placeholder="Regalo">
 		  
-			<br/><br/>
+			<br/>
 		  <button id="insert" >Insertar renglón</button>
 		
 		<p id="status"></p>
@@ -172,6 +171,7 @@ img{
 				
 			</tbody>
 		</table>
+		<p></p>
 		<button id="DropTable" >Eliminar la tabla</button>
 		<img src="gift-flat.png">   
 
