@@ -53,9 +53,10 @@ $("#showTable").click(function(){
        var len = results.rows.length, i;
        $("#rowCount").html(len);
        for (i = 0; i < len; i++){
-	}
-}, null);
-$("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td><td> <a href='edit.html?id="+results.rows.item(i).id+"&title="+results.rows.item(i).title+"&desc="+results.rows.item(i).desc+"'>Edit</a> &nbsp;&nbsp;  <a class='delete' href='#' id='"+results.rows.item(i).id+"'>Delete</a></td></tr>");
+		
+		$("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td><td><a href='edit.html?id="+results.rows.item(i).id+"&title="+results.rows.item(i).title+"&desc="+results.rows.item(i).desc+"'>Edit</a> &nbsp;&nbsp; <a class='delete' href='#' id='"+results.rows.item(i).id+"'>Delete</a></td></tr>");
+       }
+    }, null);
   });
 });
 
@@ -130,7 +131,6 @@ img{
   	margin-left: auto;
   	margin-right: auto;
 }
-
 
 
 </style>
