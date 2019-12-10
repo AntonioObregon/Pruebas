@@ -20,11 +20,11 @@ function getUrlVars() {
 
         $(document).ready(function(){
             var id = decodeURI(parseInt(getUrlVars()["id"]));
-            var title = decodeURI(getUrlVars()["title"]);
-            var desc = decodeURI(getUrlVars()["desc"]);
+            var hermano = decodeURI(getUrlVars()["hermano"]);
+            var regalo = decodeURI(getUrlVars()["regalo"]);
             $("#id").text(id);
-            $("#title").val(title);
-            $("#desc").val(desc);
+            $("#hermano").val(hermano);
+            $("#regalo").val(regalo);
 
         });
 
@@ -35,57 +35,15 @@ var myDB;
 //Open Database Connection
 document.addEventListener("deviceready",onDeviceReady,false);
 function onDeviceReady(){
-myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
+myDB = window.sqlitePlugin.openDatabase({name: "navidad.db", location: 'default'});
 }
-//Create new table
-$("#createTable").click(function(){
-    myDB.transaction(function(transaction) {
-    transaction.executeSql('CREATE TABLE IF NOT EXISTS phonegap_pro (id integer primary key, title text, desc text)', [],
-        function(tx, result) {
-            alert("Table created successfully");
-        }, 
-        function(error) {
-              alert("Error occurred while creating the table.");
-        });
-    });
-});
 
-//Insert New Data
-$("#insert").click(function(){
-  var title=$("#title").val();
-  var desc=$("#desc").val();
-  console.log(title +""+ desc);
-  myDB.transaction(function(transaction) {
-        var executeQuery = "INSERT INTO phonegap_pro (title, desc) VALUES (?,?)";             
-        transaction.executeSql(executeQuery, [title,desc]
-            , function(tx, result) {
-                 alert('Inserted');
-            },
-            function(error){
-                 alert('Error occurred'); 
-            });
-    });
-});
-
-//Display Table Data
-$("#showTable").click(function(){
-  $("#TableData").html("");
-  myDB.transaction(function(transaction) {
-  transaction.executeSql('SELECT * FROM phonegap_pro', [], function (tx, results) {
-       var len = results.rows.length, i;
-       $("#rowCount").html(len);
-       for (i = 0; i < len; i++){
-          $("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td><td><a href='edit.html?id="+results.rows.item(i).id+"&title="+results.rows.item(i).title+"&desc="+results.rows.item(i).desc+"'>Edit</a> &nbsp;&nbsp; <a class='delete' href='#' id='"+results.rows.item(i).id+"'>Delete</a></td></tr>");
-       }
-    }, null);
-  });
-});
 
 //Delete Data from Database
 $(document.body).on('click', '.delete' ,function(){
   var id=this.id;
   myDB.transaction(function(transaction) {
-    var executeQuery = "DELETE FROM phonegap_pro where id=?";
+    var executeQuery = "DELETE FROM regaloswhere id=?";
     transaction.executeSql(executeQuery, [id],
       //On Success
       function(tx, result) {alert('Delete successfully');},
@@ -98,11 +56,11 @@ $(document.body).on('click', '.delete' ,function(){
 //Delete Tables
 $("#update").click(function(){
   var id=$("#id").text();
-  var title=$("#title").val();
-  var desc=$("#desc").val()
+  var hermano=$("#hermano").val();
+  var regalo=$("#regalo").val()
   myDB.transaction(function(transaction) {
-    var executeQuery = "UPDATE phonegap_pro SET title=?, desc=? WHERE id=?";
-    transaction.executeSql(executeQuery, [title,desc,id],
+    var executeQuery = "UPDATE regalosSET hermano=?, regalo=? WHERE id=?";
+    transaction.executeSql(executeQuery, [hermano,regalo,id],
       //On Success
       function(tx, result) {alert('Updated successfully');},
       //On Error
@@ -110,15 +68,7 @@ $("#update").click(function(){
   });
 });
 
-$("#DropTable").click(function(){
-    myDB.transaction(function(transaction) {
-        var executeQuery = "DROP TABLE  IF EXISTS phonegap_pro";
-        transaction.executeSql(executeQuery, [],
-            function(tx, result) {alert('Table deleted successfully.');},
-            function(error){alert('Error occurred while droping the table.');}
-        );
-    });
-});
+
 
 });
 
@@ -153,7 +103,7 @@ padding: 1% 0%;
 
 }
 
-.regresar > a{ margin-left:40%; text-decoration: none; color: azure; font-weight: bold; }
+.regresar a{ margin-left:40%; text-decoration: none; color: azure; font-weight: bold; font-size: 110%;}
 </style>
 
 </head>
@@ -169,11 +119,11 @@ padding: 1% 0%;
  
       <p style="color: white; font-size: 120%;">ID:</p> <span id="id" style="color: white; font-size: 120%;"></span>
     <p></p>
-      <label for="title" style="color: white; font-size: 120%;">Hermano</label>     
-      <input type="text" id="title" placeholder="Nombre Hermano" value="" style="width: 96%; font-size: 120%;">
+      <label for="hermano" style="color: white; font-size: 120%;">Hermano</label>     
+      <input type="text" id="hermano" placeholder="Nombre Hermano" value="" style="width: 96%; font-size: 120%;">
       <p></p>
-      <label for="desc" style="color: white; font-size: 120%;">¿Que le regalaré?</label>	
-      <input type="text" id="desc" placeholder="Regalo" style="width: 96%; font-size: 120%;">
+      <label for="regalo" style="color: white; font-size: 120%;">¿Que le regalaré?</label>	
+      <input type="text" id="regalo" placeholder="Regalo" style="width: 96%; font-size: 120%;">
       <p></p>
     <button id="update" class="button button-block">Actualizar</button>
 
