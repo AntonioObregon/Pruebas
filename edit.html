@@ -59,12 +59,12 @@ $("#update").click(function(){
   var hermano=$("#hermano").val();
   var regalo=$("#regalo").val()
   myDB.transaction(function(transaction) {
-    var executeQuery = "UPDATE regalosSET hermano=?, regalo=? WHERE id=?";
+    var executeQuery = "UPDATE regalos SET hermano=?, regalo=? WHERE id=?";
     transaction.executeSql(executeQuery, [hermano,regalo,id],
       //On Success
       function(tx, result) { navigator.notification.alert('Datos actualizados con éxito', // Subtitulo de la ventanita o cuerpo
           vacia,
-          'Creando Tabla', // Titulo de la ventanita
+          'Actualización de datos', // Titulo de la ventanita
           'Aceptar' // Etiqueta del boton
           );},
       //On Error
