@@ -7,94 +7,119 @@
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" charset="utf-8">
 
+function vacia(){}
+
 $(document).ready(function(){
 
 var myDB;
 //Open Database Connection
 document.addEventListener("deviceready",onDeviceReady,false);
 function onDeviceReady(){
-myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
+myDB = window.sqlitePlugin.openDatabase({name: "navidad.db", location: 'default'}); //objeto que abre una conexión con la base de datos
 }
+
+
 //Create new table
 $("#createTable").click(function(){
-    myDB.transaction(function(transaction) {
-    transaction.executeSql('CREATE TABLE IF NOT EXISTS phonegap_pro (id integer primary key, title text, desc text)', [],
+    myDB.transaction(function(transaction) { //transaction es un objeto que contiene o puede o regresa llamadas a los metodos para el uso de SQL
+    transaction.executeSql('CREATE TABLE IF NOT EXISTS regalos(id integer primary key, hermano text, regalo text)', [], //uso del metodo executeSQL de forma anonima en lugar de guardar la Consulta en una variable
         function(tx, result) {
-            alert("Table created successfully");
+
+          navigator.notification.alert('Tabla creada con éxito', // Subtitulo de la ventanita o cuerpo
+          vacia,
+          'Creando Tabla', // Titulo de la ventanita
+          'Aceptar' // Etiqueta del boton
+          );
+
         }, 
         function(error) {
-              alert("Error occurred while creating the table.");
+        navigator.notification.alert('Ocurrió un error al crear la tabla', // Subtitulo de la ventanita o cuerpo
+          vacia,
+          'Error', // Titulo de la ventanita
+          'Aceptar' // Etiqueta del boton
+          );
         });
     });
 });
 
 //Insert New Data
 $("#insert").click(function(){
-  var title=$("#title").val();
-  var desc=$("#desc").val();
-  console.log(title +""+ desc);
+  var hermano=$("#hermano").val(); //trayendo los valores de los textinputs
+  var regalo=$("#regalo").val();
+  
   myDB.transaction(function(transaction) {
-        var executeQuery = "INSERT INTO phonegap_pro (title, desc) VALUES (?,?)";             
-        transaction.executeSql(executeQuery, [title,desc]
+        var executeQuery = "INSERT INTO regalos (hermano, regalo) VALUES (?,?)";            //consulta SQL
+        transaction.executeSql(executeQuery, [hermano,regalo]
             , function(tx, result) {
-                 alert('Inserted');
+                navigator.notification.alert('Datos insertados con éxito', // Subtitulo de la ventanita o cuerpo
+          vacia,
+          'Inserción', // Titulo de la ventanita
+          'Aceptar' // Etiqueta del boton
+          );
             },
             function(error){
-                 alert('Error occurred'); 
+              navigator.notification.alert('Ocurrió un error al insertar los datos', // Subtitulo de la ventanita o cuerpo
+          vacia,
+          'Error', // Titulo de la ventanita
+          'Aceptar' // Etiqueta del boton
+          );
             });
     });
 });
 
 //Display Table Data
 $("#showTable").click(function(){
-  $("#TableData").html("");
+  $("#TableData").html(""); //funcion jquery para llamar anonimamente a la tabla
   myDB.transaction(function(transaction) {
-  transaction.executeSql('SELECT * FROM phonegap_pro', [], function (tx, results) {
+  transaction.executeSql('SELECT * FROM regalos', [], function (tx, results) {
        var len = results.rows.length, i;
-       $("#rowCount").html(len);
-       for (i = 0; i < len; i++){
+       
+       for (i = 0; i < len; i++){ //por cada renglón de la tabla en la BD se crea un renglón en la tabla HTML
 		
-		$("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).title+"</td><td>"+results.rows.item(i).desc+"</td><td ><a href='edit.html?id="+results.rows.item(i).id+"&title="+results.rows.item(i).title+"&desc="+results.rows.item(i).desc+"'>Edit</a> &nbsp;&nbsp; <a class='delete' href='#' id='"+results.rows.item(i).id+"'>Delete</a></td></tr>");
+		$("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).hermano+"</td><td>"+results.rows.item(i).regalo+"</td><td ><a href='edit.html?id="+results.rows.item(i).id+"&hermano="+results.rows.item(i).hermano+"&regalo="+results.rows.item(i).regalo+"'>Editar</a> &nbsp;&nbsp; <a class='delete' href='#' id='"+results.rows.item(i).id+"'>Borrar</a></td></tr>");
        }
     }, null);
   });
 });
 
 //Delete Data from Database
-$(document.body).on('click', '.delete' ,function(){
+$(document.body).on('click', '.borrar' ,function(){ //función JQuery
   var id=this.id;
   myDB.transaction(function(transaction) {
-    var executeQuery = "DELETE FROM phonegap_pro where id=?";
+    var executeQuery = "DELETE FROM regalos where id=?";
     transaction.executeSql(executeQuery, [id],
       //On Success
-      function(tx, result) {alert('Delete successfully');},
+      function(tx, result) { navigator.notification.alert('Datos eliminados con éxito', // Subtitulo de la ventanita o cuerpo
+          vacia,
+          'Eliminación', // Titulo de la ventanita
+          'Aceptar' // Etiqueta del boton
+          );},
       //On Error
-      function(error){alert('Something went Wrong');});
+      function(error){ navigator.notification.alert('Ocurrió un error al eliminar los datos', // Subtitulo de la ventanita o cuerpo
+          vacia,
+          'Error', // Titulo de la ventanita
+          'Aceptar' // Etiqueta del boton
+          );});
   });
 });
 
 
-//Delete Tables
-$("#update").click(function(){
-  var id=$("#id").text();
-  var title=$("#title").val();
-  var desc=$("#desc").val()
-  myDB.transaction(function(transaction) {
-    var executeQuery = "UPDATE phonegap_pro SET title=?, desc=? WHERE id=?";
-    transaction.executeSql(executeQuery, [title,desc,id],
-      //On Success
-      function(tx, result) {alert('Updated successfully');},
-      //On Error
-      function(error){alert('Something went Wrong');});
-  });
-});
+
 
 $("#DropTable").click(function(){
     myDB.transaction(function(transaction) {
-        var executeQuery = "DROP TABLE  IF EXISTS phonegap_pro";
+        var executeQuery = "DROP TABLE  IF EXISTS regalos";
         transaction.executeSql(executeQuery, [],
-            function(tx, result) {alert('Table deleted successfully.');},
-            function(error){alert('Error occurred while droping the table.');}
+            function(tx, result) { navigator.notification.alert('Tabla eliminada con éxito', // Subtitulo de la ventanita o cuerpo
+          vacia,
+          'Eliminación', // Titulo de la ventanita
+          'Aceptar' // Etiqueta del boton
+          );},
+            function(error){navigator.notification.alert('Ocurrió un error al eliminar la tabla', // Subtitulo de la ventanita o cuerpo
+          vacia,
+          'Error', // Titulo de la ventanita
+          'Aceptar' // Etiqueta del boton
+          );}
         );
     });
 });
@@ -148,11 +173,11 @@ img{
 
 		<button id="createTable" >Crear Tabla</button>
 		<p></p>
-		<label for="title" style="color: white; font-size: 120%;">Hermano</label>
-			<input type="text" id="title" placeholder="Nombre Hermano" style="width: 96%; font-size: 120%;">
+		<label for="hermano" style="color: white; font-size: 120%;">Hermano</label>
+			<input type="text" id="hermano" placeholder="Nombre Hermano" style="width: 96%; font-size: 120%;">
 			<p></p>
-			<label for="desc" style="color: white; font-size: 120%;">¿Que le regalaré?</label>	
-			<input type="text" id="desc" placeholder="Regalo" style="width: 96%; font-size: 120%;">
+			<label for="regalo" style="color: white; font-size: 120%;">¿Que le regalaré?</label>	
+			<input type="text" id="regalo" placeholder="Regalo" style="width: 96%; font-size: 120%;">
 		  
 			<p></p>
 		  <button id="insert" >Insertar renglón</button>
@@ -163,8 +188,8 @@ img{
 		<table class="table">
 			<thead>
 				<th>ID</th>
-				<th>Title</th>
-				<th>Desc</th>
+				<th>Hermano</th>
+				<th>Regalo</th>
 				<th>Action</th>
 			</thead>
 			<tbody id="TableData">
