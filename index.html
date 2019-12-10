@@ -7,95 +7,68 @@
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" charset="utf-8">
 
-function vacia(){}
+function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
 
-$(document).ready(function(){
+        $(document).ready(function(){
+            var id = decodeURI(parseInt(getUrlVars()["id"]));
+            var hermano = decodeURI(getUrlVars()["hermano"]);
+            var regalo = decodeURI(getUrlVars()["regalo"]);
+            $("#id").text(id);
+            $("#hermano").val(hermano);
+            $("#regalo").val(regalo);
+
+        });
+
+
+        $(document).ready(function(){
 
 var myDB;
 //Open Database Connection
 document.addEventListener("deviceready",onDeviceReady,false);
 function onDeviceReady(){
-myDB = window.sqlitePlugin.openDatabase({name: "navidad.db", location: 'default'}); //objeto que abre una conexión con la base de datos
+myDB = window.sqlitePlugin.openDatabase({name: "navidad.db", location: 'default'});
 }
 
 
-//Create new table
-$("#createTable").click(function(){
-    myDB.transaction(function(transaction) { //transaction es un objeto que contiene o puede o regresa llamadas a los metodos para el uso de SQL
-    transaction.executeSql('CREATE TABLE IF NOT EXISTS regalos(id integer primary key, hermano text, regalo text)', [], //uso del metodo executeSQL de forma anonima en lugar de guardar la Consulta en una variable
-        function(tx, result) {
-
-          navigator.notification.alert('Tabla creada con éxito', // Subtitulo de la ventanita o cuerpo
-          vacia,
-          'Creando Tabla', // Titulo de la ventanita
-          'Aceptar' // Etiqueta del boton
-          );
-
-        }, 
-        function(error) {
-        navigator.notification.alert('Ocurrió un error al crear la tabla', // Subtitulo de la ventanita o cuerpo
-          vacia,
-          'Error', // Titulo de la ventanita
-          'Aceptar' // Etiqueta del boton
-          );
-        });
-    });
-});
-
-//Insert New Data
-$("#insert").click(function(){
-  var hermano=$("#hermano").val(); //trayendo los valores de los textinputs
-  var regalo=$("#regalo").val();
-  
+//Delete Data from Database
+$(document.body).on('click', '.delete' ,function(){
+  var id=this.id;
   myDB.transaction(function(transaction) {
-        var executeQuery = "INSERT INTO regalos (hermano, regalo) VALUES (?,?)";            //consulta SQL
-        transaction.executeSql(executeQuery, [hermano,regalo]
-            , function(tx, result) {
-                navigator.notification.alert('Datos insertados con éxito', // Subtitulo de la ventanita o cuerpo
-          vacia,
-          'Inserción', // Titulo de la ventanita
-          'Aceptar' // Etiqueta del boton
-          );
-            },
-            function(error){
-              navigator.notification.alert('Ocurrió un error al insertar los datos', // Subtitulo de la ventanita o cuerpo
-          vacia,
-          'Error', // Titulo de la ventanita
-          'Aceptar' // Etiqueta del boton
-          );
-            });
-    });
-});
-
-//Display Table Data
-$("#showTable").click(function(){
-  $("#TableData").html(""); //funcion jquery para llamar anonimamente a la tabla
-  myDB.transaction(function(transaction) {
-  transaction.executeSql('SELECT * FROM regalos', [], function (tx, results) {
-       var len = results.rows.length, i;
-       
-       for (i = 0; i < len; i++){ //por cada renglón de la tabla en la BD se crea un renglón en la tabla HTML
-		
-		$("#TableData").append("<tr><td>"+results.rows.item(i).id+"</td><td>"+results.rows.item(i).hermano+"</td><td>"+results.rows.item(i).regalo+"</td><td ><a href='edit.html?id="+results.rows.item(i).id+"&hermano="+results.rows.item(i).hermano+"&regalo="+results.rows.item(i).regalo+"'>Editar</a> &nbsp;&nbsp; <a class='delete' href='#' id='"+results.rows.item(i).id+"'>Borrar</a></td></tr>");
-       }
-    }, null);
+    var executeQuery = "DELETE FROM regaloswhere id=?";
+    transaction.executeSql(executeQuery, [id],
+      //On Success
+      function(tx, result) {alert('Delete successfully');},
+      //On Error
+      function(error){alert('Something went Wrong');});
   });
 });
 
-//Delete Data from Database
-$(document.body).on('click', '.borrar' ,function(){ //función JQuery
-  var id=this.id;
+
+//Delete Tables
+$("#update").click(function(){
+  var id=$("#id").text();
+  var hermano=$("#hermano").val();
+  var regalo=$("#regalo").val()
   myDB.transaction(function(transaction) {
-    var executeQuery = "DELETE FROM regalos where id=?";
-    transaction.executeSql(executeQuery, [id],
+    var executeQuery = "UPDATE regalos SET hermano=?, regalo=? WHERE id=?";
+    transaction.executeSql(executeQuery, [hermano,regalo,id],
       //On Success
-      function(tx, result) { navigator.notification.alert('Datos eliminados con éxito', // Subtitulo de la ventanita o cuerpo
+      function(tx, result) { navigator.notification.alert('Datos actualizados con éxito', // Subtitulo de la ventanita o cuerpo
           vacia,
-          'Eliminación', // Titulo de la ventanita
+          'Actualización de datos', // Titulo de la ventanita
           'Aceptar' // Etiqueta del boton
           );},
       //On Error
-      function(error){ navigator.notification.alert('Ocurrió un error al eliminar los datos', // Subtitulo de la ventanita o cuerpo
+      function(error){navigator.notification.alert('Ocurrió un error al intentar actualizar los datos', // Subtitulo de la ventanita o cuerpo
           vacia,
           'Error', // Titulo de la ventanita
           'Aceptar' // Etiqueta del boton
@@ -105,28 +78,7 @@ $(document.body).on('click', '.borrar' ,function(){ //función JQuery
 
 
 
-
-$("#DropTable").click(function(){
-    myDB.transaction(function(transaction) {
-        var executeQuery = "DROP TABLE  IF EXISTS regalos";
-        transaction.executeSql(executeQuery, [],
-            function(tx, result) { navigator.notification.alert('Tabla eliminada con éxito', // Subtitulo de la ventanita o cuerpo
-          vacia,
-          'Eliminación', // Titulo de la ventanita
-          'Aceptar' // Etiqueta del boton
-          );},
-            function(error){navigator.notification.alert('Ocurrió un error al eliminar la tabla', // Subtitulo de la ventanita o cuerpo
-          vacia,
-          'Error', // Titulo de la ventanita
-          'Aceptar' // Etiqueta del boton
-          );}
-        );
-    });
 });
-
-});
-
-
 
 
 </script>
@@ -137,21 +89,8 @@ $("#DropTable").click(function(){
 	padding: 0% 1%;
 }
 
-body{background-color: #c54245; }
+body{background-color: #146b3a; }
 
-#createTable{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%; border:none;}
-
-#insert{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%; border:none;}
-
-#showTable	{background-color: #146b3a; font-weight: bold; font-size: 150%; color: white; width: 100%; border:none;}
-
-table{background-color: #146b3a;font-weight: bold; font-size: 90%; color: white; width: 100%;}
-
-
-#DropTable{background-image: url(botoneliminar.png); font-weight: bold; font-size: 150%; color: #2e3c7c; width: 100%; border:none;}
-
-
-table td a {text-decoration: none; color: white; background-color: teal;}
 
 img{
     width: 50%;
@@ -161,8 +100,18 @@ img{
   	margin-right: auto;
 }
 
+#update{background-image: url(botoneliminar.png); font-weight: bold; font-size: 200%; color: #993a3a; width: 100%;}
 
+.regresar{
 
+width: 100%;  
+height: auto;
+background-color: #993a3a;
+padding: 1% 0%;
+
+}
+
+.regresar a{ margin-left:40%; text-decoration: none; color: azure; font-weight: bold; font-size: 110%;}
 </style>
 
 </head>
@@ -171,33 +120,22 @@ img{
 <h1 style="color: white;">Hermanos y regalos</h1>
 	</center>
 
-		<button id="createTable" >Crear Tabla</button>
-		<p></p>
-		<label for="hermano" style="color: white; font-size: 120%;">Hermano</label>
-			<input type="text" id="hermano" placeholder="Nombre Hermano" style="width: 96%; font-size: 120%;">
-			<p></p>
-			<label for="regalo" style="color: white; font-size: 120%;">¿Que le regalaré?</label>	
-			<input type="text" id="regalo" placeholder="Regalo" style="width: 96%; font-size: 120%;">
-		  
-			<p></p>
-		  <button id="insert" >Insertar renglón</button>
-		<p></p>
-		
-		<button id="showTable">Mostrar Tabla</button>
-		<p></p>
-		<table class="table">
-			<thead>
-				<th>ID</th>
-				<th>Hermano</th>
-				<th>Regalo</th>
-				<th>Action</th>
-			</thead>
-			<tbody id="TableData">
-				
-			</tbody>
-		</table>
-		<p></p>
-		<button id="DropTable" >Eliminar la tabla</button>
+  <div class="regresar">
+        <a href="index.html">Regresar</a>
+  </div>
+      <h2 style="color: white;">Actualizar tabla</h2>
+ 
+      <p style="color: white; font-size: 120%;">ID:</p> <span id="id" style="color: white; font-size: 120%;"></span>
+    <p></p>
+      <label for="hermano" style="color: white; font-size: 120%;">Hermano</label>     
+      <input type="text" id="hermano" placeholder="Nombre Hermano" value="" style="width: 96%; font-size: 120%;">
+      <p></p>
+      <label for="regalo" style="color: white; font-size: 120%;">¿Que le regalaré?</label>	
+      <input type="text" id="regalo" placeholder="Regalo" style="width: 96%; font-size: 120%;">
+      <p></p>
+    <button id="update" class="button button-block">Actualizar</button>
+
+
 		<p></p>
 		<img src="gift-flat.png">   
 
