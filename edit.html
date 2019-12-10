@@ -62,11 +62,7 @@ $("#update").click(function(){
     var executeQuery = "UPDATE regalos SET hermano=?, regalo=? WHERE id=?";
     transaction.executeSql(executeQuery, [hermano,regalo,id],
       //On Success
-      function(tx, result) { navigator.notification.alert('Datos actualizados con éxito', // Subtitulo de la ventanita o cuerpo
-          vacia,
-          'Actualización de datos', // Titulo de la ventanita
-          'Aceptar' // Etiqueta del boton
-          );},
+      function(tx, result) { alert('Delete successfully');},
       //On Error
       function(error){navigator.notification.alert('Ocurrió un error al intentar actualizar los datos', // Subtitulo de la ventanita o cuerpo
           vacia,
