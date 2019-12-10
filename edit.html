@@ -62,9 +62,17 @@ $("#update").click(function(){
     var executeQuery = "UPDATE regalosSET hermano=?, regalo=? WHERE id=?";
     transaction.executeSql(executeQuery, [hermano,regalo,id],
       //On Success
-      function(tx, result) {alert('Updated successfully');},
+      function(tx, result) { navigator.notification.alert('Datos actualizados con éxito', // Subtitulo de la ventanita o cuerpo
+          vacia,
+          'Creando Tabla', // Titulo de la ventanita
+          'Aceptar' // Etiqueta del boton
+          );},
       //On Error
-      function(error){alert('Something went Wrong');});
+      function(error){navigator.notification.alert('Ocurrió un error al intentar actualizar los datos', // Subtitulo de la ventanita o cuerpo
+          vacia,
+          'Error', // Titulo de la ventanita
+          'Aceptar' // Etiqueta del boton
+          );});
   });
 });
 
